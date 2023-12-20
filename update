@@ -1,0 +1,54 @@
+#svn update
+git pull
+
+if [ -d jbxl ]; then
+    #svn update jbxl
+    (cd jbxl; git pull)
+else
+    #svn co http://www.nsl.tuis.ac.jp/svn/php/jbxl/trunk jbxl
+    git clone https://github.com/JunkBox-Library/jbxl-php.git jbxl
+fi
+
+if [ -d flotsam_XmlRpcGroup ]; then
+    #svn update flotsam_XmlRpcGroup
+    (cd flotsam_XmlRpcGroup; git pull)
+else
+    #svn co http://www.nsl.tuis.ac.jp/svn/opensim/flotsam_XmlRpcGroup/trunk flotsam_XmlRpcGroup
+    git clone https://github.com/MTSGJ/flotsam_XmlRpcGroup.git
+fi
+
+if [ -d opensim.phplib ]; then
+    #svn update opensim.phplib
+    (cd opensim.phplib; git pull)
+else
+    #svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.phplib/trunk opensim.phplib
+    git clone https://github.com/MTSGJ/opensim.phplib.git
+fi
+
+if [ -d opensim.helper ]; then
+    #svn update opensim.helper
+    (cd opensim.helper; git pull)
+else
+    #svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.helper/trunk opensim.helper
+    git clone https://github.com/MTSGJ/opensim.helper.git
+fi
+
+if [ -d opensim.modules ]; then
+    #svn update opensim.modules
+    (cd opensim.modules; git pull)
+else
+    #svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.modules/trunk opensim.modules
+    git clone https://github.com/MTSGJ/opensim.modules.git
+fi
+
+[ -f helper/mute.php ]            || cp opensim.modules/Messaging/php/mute.php helper/mute.php
+[ -f helper/profile.php ]         || cp opensim.modules/Profile/php/profile.php helper/profile.php
+[ -f helper/parser.php ]          || cp opensim.modules/Search/php/parser.php helper/parser.php
+[ -f helper/query.php ]           || cp opensim.modules/Search/php/query.php helper/query.php
+[ -f helper/register.php ]        || cp opensim.modules/Search/php/register.php helper/register.php
+[ -f helper/cron_search.php ]     || cp opensim.modules/Search/php/cron_search.php helper/cron_search.php
+
+[ -f include/profile_config.php ] || cp opensim.modules/Profile/php/profile_config.php include/profile_config.php
+[ -f include/search_config.php ]  || cp opensim.modules/Search/php/search_config.php include/search_config.php
+[ -f include/message_config.php ] || cp opensim.modules/Messaging/php/message_config.php include/message_config.php
+

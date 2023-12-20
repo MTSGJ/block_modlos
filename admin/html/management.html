@@ -1,0 +1,65 @@
+
+<style type="text/css">
+  <?php include(CMS_MODULE_PATH."/html/html.css")?>
+</style>
+
+<h2><center><?php echo $grid_name.":&nbsp;".$manage_ttl?></center></h2>
+
+
+<!-- Error Message -->
+<?php if ($this->hasError) {?>
+  <div align="center" style="margin-bottom:10px;">
+    <ul style="list-style:none;">
+      <?php foreach($this->errorMsg as $mesg) {?>
+         <li><strong style="color: #f02022;"><?php echo $mesg?></strong></li>
+      <?php }?>
+    </ul>
+  </div>
+<?php }?>
+
+
+<?php if (!$this->managed) {?>
+  <form action="<?php echo $this->action_url?>" method="POST">
+
+    <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0" style="margin-bottom:10px;">
+      <tr>
+        <td width=80% class="head" align="center"><strong style="color:#116644;"><?php echo $content?></strong></td>
+      </tr>
+    </table>
+
+    <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
+    <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
+    <input type="hidden" name="quest"   value="yes" />
+
+    <div align=center>
+      <strong><div style="padding:4px; margin-top:10px;" ><?php echo $select_cmd?></div></strong>
+      <br />
+      <select wide="48" name="manage_command">
+        <?php foreach($commands as $com) {?>
+          <option value="<?php echo $com['com']?>" ><?php echo htmlspecialchars($com['ttl'])?></option>
+        <?php }?>
+      </select>&nbsp;&nbsp;
+
+      <input type="submit" value="<?php echo $manage_submit?>" /> 
+    </div>
+  </form>
+
+<?php } else {?>
+
+  <?php foreach($commands as $com) {?>
+     <?php if ($command==$com['com']) {?>
+       <table width="600" border="0" align="center" cellpadding="2" cellspacing="2">
+         <tr>
+           <td width=80% class="head" align="center"><strong><span style="color:#116644"><?php echo $com['ttl'] ?></span></strong></td>
+         </tr>
+       </table>
+       <?php break?>
+     <?php }?>
+  <?php }?>
+
+  <div align=center>
+    <h4 style="color: #2222ff; margin-top:20px;"><?php echo $manage_msg ?></h4>
+    <h4 style="margin-top:10px;"><a href="<?php echo $manage_url?>" ><?php echo $return_ttl?></a></h4>
+  </div>
+<?php }?>
+<br />

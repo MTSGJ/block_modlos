@@ -1,0 +1,77 @@
+<style type="text/css">
+  <?php include(CMS_MODULE_PATH."/html/html.css")?>
+</style>
+
+<h2><center><?php echo $grid_name?>&nbsp;:&nbsp;<?php echo $events_show_ttl?></center></h2>
+
+<form action="<?php echo $this->return_url?>" method="GET">
+  <table cellSpacing=0 cellPadding=0 width=600 border=0 align=center>
+    <tbody>
+
+            <tr align="left">
+              <td class="head" width=200><?php echo $events_name?></td>
+              <td class="odd"  width=400><?php echo $this->event_name?></td>
+            </tr>
+
+            <tr align="left">
+              <td class="head" valign="top"><?php echo $events_desc?></td>
+              <td class="even">
+                <textarea name="event_desc" rows="7" cols="" style="width:90%;" readonly><?php echo $this->event_desc?></textarea>
+              </td>
+            </tr>
+            <tr align="left">
+              <td class="head" valign="top"><?php echo $events_creator?></td>
+              <td class="odd">
+	      		<?php echo $this->event_creator?>
+              </td>
+            </tr>
+
+			<?php include($date_file)?>
+
+            <tr align="left">
+              <td class="head"><?php echo $events_category?></td>
+              <td class="odd"> <?php echo $Categories[$this->category]?></td>
+            </tr>
+
+            <tr align="left">
+              <td nowrap class="head"><?php echo $events_charge?></td>
+              <td class="even">
+                <?php 
+                  if ($this->cover_charge==0) echo get_string('modlos_no', 'block_modlos');
+                  else                        echo get_string('modlos_yes','block_modlos');
+                ?>
+                &nbsp;&nbsp;
+                <?php echo $events_amount?>:&nbsp;<?php echo $this->cover_amount?>
+              </td>
+            </tr>
+
+            <tr align="left">
+              <td class="head"><?php echo $events_location?></td>
+              <td class="odd">
+	      		<?php
+                  foreach ($this->parcels as $parcel) {
+                    if ($this->global_pos==$parcel['landingpoint'] and $this->region_uuid==$parcel['regionUUID']) {
+                      echo $parcel['name'];
+                      break;
+                    }
+	      	      }
+                ?>
+              </td>
+            </tr>
+
+            <?php if (!OPENSIM_PG_ONLY) {?>
+              <tr align="left">
+                <td class="head"><?php echo $events_type_ttl?></td>
+                <td class="even"><?php echo $events_mature_ttl?></td>
+              </tr>
+            <?php }?>
+    </tbody>
+  </table>
+
+  <div align="center" style="margin-top:10px;">
+    <input type="hidden" name="course" value="<?php echo $this->course_id?>" />
+    <input name="submit_return" type="submit" value="<?php echo $return_ttl?>" />
+  </div>
+
+</form>
+<br />

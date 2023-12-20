@@ -1,0 +1,105 @@
+
+<style type="text/css">
+  <?php include(CMS_MODULE_PATH."/html/html.css")?>
+</style>
+
+<style type="text/css">
+td {
+    border:0;
+}
+
+.mform .fitem div.fitemtitle {
+    width: 80px;
+}
+
+.mform .fitem .felement {
+    margin-left: 100px;
+}
+</style>
+
+
+<h2><center><?php echo $grid_name.":&nbsp;".$avatar_templ_ttl?></center></h2>
+
+
+<table width="600" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#f0f0f0; margin-bottom:15px;">
+  <tr>
+    <td width=80% class="head" align="center"><strong style="color:#116644;"><?php echo $content?></strong></td>
+  </tr>
+</table>
+
+
+<div style="margin-bottom: 0px;" align="center">
+  <h4><a href="<?php echo $add_url?>" style="color:#c04040;"><u><?php echo $add_avatar?></u></a></h4>
+</div>
+
+
+<table width="700" border="0" align="center" cellpadding="2" cellspacing="2" style="margin-bottom:10px; table-layout:fixed;">
+  <tr><td><?php echo $total_num?> avatars</td></tr>
+
+  <tr>
+    <td class="generalboxcontent" style="width:100%; table-layout:fixed;">
+      <?php foreach($avatars as $avatar) {?>
+      <table width="100%" border="0" bordercolor="#ffffff" cellpadding="0" cellspacing="0" style="background-color:#f0f0f0; margin-bottom:10px;">
+
+        <tr>
+          <td style="width: 30px; table-layout:fixed;"><?php echo $avatar['num']?></td>
+          <td style="width: 60px; table-layout:fixed;">
+            <?php if ($avatar['status']==0) {?>
+              <strong style="color:#909090;"><?php echo $modlos_invalid?></strong>
+            <?php } else {?>
+              <strong style="color:#109010;"><?php echo $modlos_valid?></strong>
+            <?php }?>
+          </td>
+          <td colspan="3" style="width:610px; table-layout:fixed;">
+            <?php if ($avatar['status']==0) {?>
+              <strong style="color:#909090;"><?php echo $avatar['title']?></strong>
+            <?php } else {?>
+              <strong style="color:#2020c0;"><?php echo $avatar['title']?></strong>
+            <?php }?>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="width: 30px; table-layout:fixed;">&nbsp;</td>
+          <td style="width: 60px; table-layout:fixed;">
+            <strong>
+              <a href="<?php echo $edit_url.$avatar['id']?>" style="color:#c02020;"><?php echo $modlos_edit?></a>
+            </strong>
+          </td>
+          <td style="width:260px;table-layout:fixed;">
+            <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_params.'&agent='.$avatar['uuid']?>','','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+              <strong style="color:#105ba7;"><?php echo $avatar['fullname']?></strong>
+            </a>
+          </td>
+          <td style="width: 10px; table-layout:fixed;">&nbsp;</td>
+          <td style="width:340px; table-layout:fixed;">
+            <strong style="color:#404040;"><?php echo $avatar['uuid']?></strong>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="width: 30px; table-layout:fixed;">&nbsp;</td>
+          <td style="width: 60px; table-layout:fixed;" valign="top">
+            <strong>
+              <a href="<?php echo $delete_url.$avatar['id']?>" style="color:#c02020;"><?php echo $modlos_delete?></a>
+            </strong>
+          </td>
+          <td style="width:260px; table-layout:fixed;">
+            <?php if ($avatar['url']) {?>
+              <a href="<?php echo $avatar['url']?>" target="_blank">
+                <img src="<?php echo $avatar['url']?>" width="256" style="margin-bottom:10px;"/></td>
+              </a>
+            <?php } else {?>
+              <img src="<?php echo CMS_MODULE_URL?>/images/info.jpg" width="256" style="margin-bottom:10px;"/>
+            <?php }?>
+          </td>
+          <td style="width: 10px; table-layout:fixed;">&nbsp;</td>
+          <td style="width:340px; table-layout:fixed; word-break:break-all;" valign="top"><?php echo $avatar['html']?></td>
+        </tr>
+
+      </table>
+      <?php }?>
+    </td>
+  </tr>
+</table>
+<br />

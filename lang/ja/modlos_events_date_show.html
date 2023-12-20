@@ -1,0 +1,82 @@
+
+            <tr align="left">
+              <?php if (USE_UTC_TIME) {?>
+                <td class="head"><?php echo $events_date?>&nbsp;(UTC)</td>
+              <?php } else {?>
+                <td class="head"><?php echo $events_date?>&nbsp;(Local)</td>
+              <?php }?>
+
+              <td class="odd">
+                <?php
+                  $now_year = date('Y');
+                  for ($t=$now_year; $t<$now_year + 3; $t++) { 
+                     if ($t==$now_year) echo "$t 年";
+                  }
+                ?>
+                &nbsp;&nbsp;
+
+                <?php
+                  for ($m=1; $m<13; $m++) {
+                    if ($m==$this->event_month) {
+                      echo "$m 月";
+                    }
+                  }
+                ?>
+                &nbsp;&nbsp;
+
+                <?php 
+                  for ($d=1; $d<32; $d++) { 
+                    if ($d==$this->event_day) {
+                      echo "$d 日";
+                    }
+                  }
+                ?>
+              </td>
+            </tr>
+
+            <tr align="left">
+              <?php if (USE_UTC_TIME) {?>
+                <td class="head"><?php echo $events_starts?>&nbsp;(UTC)</td>
+              <?php } else {?>
+                <td class="head"><?php echo $events_starts?>&nbsp;(Local)</td>
+              <?php }?>
+
+              <td class="even">
+                <?php 
+                  $h = $this->event_hour;
+                  if ($h<13) {
+                    echo "午前 $h 時";
+                  }
+                  else {
+                    $h = $h - 12;
+                    echo "午後 $h 時";
+                  }
+                ?>
+
+                <?php 
+                  if      ($this->event_minute==0)  echo "00分";
+                  else if ($this->event_minute==15) echo "15分"; 
+                  else if ($this->event_minute==30) echo "30分";
+                  else if ($this->event_minute==45) echo "45分";
+                ?>
+              </td>
+            </tr>
+
+            <tr align="left">
+              <td class="head"><?php echo $events_duration?></td>
+              <td class="odd">
+                <?php 
+                  if      ($this->duration==10) echo "10分間"; 
+                  else if ($this->duration==15) echo "15分間";
+                  else if ($this->duration==20) echo "20分間";
+                  else if ($this->duration==25) echo "25分間";
+                  else if ($this->duration==30) echo "30分間";
+                  else if ($this->duration==45) echo "45分間";
+                  else if ($this->duration==60) echo "1時間";
+                  else if ($this->duration==90) echo "1時間半";
+                  else if ($this->duration==120)echo "2時間";
+                  else if ($this->duration==150)echo "2時間半";
+                  else if ($this->duration==180)echo "3時間";
+                ?>
+              </td>
+            </tr>

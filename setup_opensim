@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if [ $# -lt 1 ]; then
+    echo Usage.... $0 Install_Directory_of_OpenSim 
+    exit
+fi
+
+OS_DIR=$1
+if [ ! -d $OS_DIR ]; then
+    echo "not exist $OS_DIR that is installed OpenSim"
+    exit
+fi
+
+cp -Rpd opensim.modules $OS_DIR

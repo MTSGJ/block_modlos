@@ -1,0 +1,107 @@
+
+<style type="text/css">
+  <?php include(CMS_MODULE_PATH."/html/show_status.css")?>
+  <?php include(CMS_MODULE_PATH."/html/html.css")?>
+</style>
+
+
+<table class="top_table" border="0" cellpadding="0" cellspacing="0" align="center">
+  <tr>
+    <td>
+      <div class="top_content">
+        <?php echo $content?>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<div id="top_div">
+<table class="grid_table" border="0" cellpadding="0" cellspacing="0" align="center">
+  <tbody>
+    <tr><td><hr /></td></tr>
+    <tr><span class="grid_title"><center><?php echo $grid_name?></center></span></tr>
+    <tr>&nbsp;</tr>
+    <tr>
+      <td valign="top" align="right">
+        <table cellspacing="0" cellpadding="0" width="300" border="0" align="center">
+          <tbody>
+            <tr>
+            <tr>
+              <td class="td_space"></td>
+              <td class="td_style">
+
+                <table cellspacing="0" cellpadding="1" width="100%" border="0">
+                  <tbody>
+                    <tr>
+                      <td class="padding" align="left">
+                        <span class="txtcolor">
+                          <strong><?php echo $db_status?>: </strong>
+                        </span>
+                      </td>
+                      <td class="padding" align="right">
+                        <?php if ($this->grid_status) {?>
+                          <span id="online" ><?php echo $online_ttl?></span>
+                        <?php } else {?>
+                          <span id="offline"><?php echo $offline_ttl?></span>
+                        <?php }?>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <table cellspacing="0" cellpadding="0" width="100%" border="0">
+                  <tbody>
+                    <tr bgcolor="#151515">
+                      <td class="padding" valign="top" nowrap="nowrap" align="left">
+                        <span class="txtcolor"><?php echo $total_users?>: </span>
+                      </td>
+                      <td class="padding" valign="top" nowrap="nowrap" align="right" width="1%">
+                        <span class="txtcolor"><?php echo $this->user_count?></span>
+                      </td>
+                    </tr>
+                    <tr bgcolor="#000000">
+                      <td class="padding" valign="top" nowrap="nowrap" align="left">
+                        <span class="txtcolor"><?php echo $total_regions?>: </span>
+                      </td>
+                      <td class="padding" valign="top" nowrap="nowrap" align="right" width="1%">
+                        <span class="txtcolor"><?php echo $this->region_count?></span>
+                      </td>
+                    </tr>
+                    <tr bgcolor="#151515">
+                      <td class="padding" valign="top" nowrap="nowrap" align="left">
+                        <span class="txtcolor"><?php echo $visitors_last30days?>: </span>
+                      </td>
+                      <td class="padding" valign="top" nowrap="nowrap" align="right" width="1%">
+                        <span class="txtcolor"><?php echo $this->lastmonth_online?></span>
+                      </td>
+                    </tr>
+                    <tr bgcolor="#000000">
+                      <td class="padding" valign="top" nowrap="nowrap" align="left">
+                        <span class="txtcolor"><strong><?php echo $online_now?>: </strong></span>
+                      </td>
+                      <td class="padding" valign="top" nowrap="nowrap" align="right" width="1%">
+                        <span class="txtcolor"><strong><?php echo $this->now_online?></strong></span>
+                      </td>
+                    </tr>
+                    <tr bgcolor="#151515">
+                      <td class="padding" valign="top" nowrap="nowrap" align="left">
+                        <span class="txtcolor"><?php echo $online_hg?>: </span>
+                      </td>
+                      <td class="padding" valign="top" nowrap="nowrap" align="right" width="1%">
+                        <span class="txtcolor"><?php echo $this->hg_online?></span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </td>
+              <td class="td_space"></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br />

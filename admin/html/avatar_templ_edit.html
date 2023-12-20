@@ -1,0 +1,121 @@
+
+<style type="text/css">
+  <?php include(CMS_MODULE_PATH."/html/html.css")?>
+</style>
+
+<style type="text/css">
+.mform .fitem div.fitemtitle {
+    width: 80px;
+}
+
+.mform .fitem .felement {
+    margin-left: 100px;
+    margin-right: 20px;
+}
+</style>
+
+
+<h2><center><?php echo $grid_name.":&nbsp;".$avatar_templ_ttl?></center></h2>
+
+<table width="600" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#f0f0f0; margin-bottom:15px;">
+  <tr>
+    <td width=80% class="head" align="center"><strong style="color:#116644;"><?php echo $edit_avatar?></strong></td>
+  </tr>
+</table>
+
+
+<!-- Error Message -->
+<?php if ($this->hasError) {?>
+  <div align="center" style="margin-bottom:10px;">
+    <ul style="list-style:none;">
+      <li><strong style="color: #f02022;"><?php echo $edit_fail?></strong></li>
+      <?php foreach($this->errorMsg as $mesg) {?>
+        <li><strong style="color: #f02022;"><?php echo $mesg?></strong></li>
+      <?php }?>
+    </ul>
+  </div>
+<?php } else if ($isPost) {?>
+  <div align="center" style="margin-bottom:10px;">
+    <ul style="list-style:none;">
+      <li><strong style="color: #2020f0;"><?php echo $edit_success?></strong></li>
+    </ul>
+  </div>
+<?php }?>
+
+
+<?php if ($isPost) {?>
+<table width="660" border="0" align="center" cellpadding="2" cellspacing="2" style="table-layout:fixed;">
+  <tr>
+    <td class="generalboxcontent" style="width:100%; table-layout:fixed;">
+      <table width="100%" border="0" bordercolor="#ffffff" cellpadding="0" cellspacing="0" style="background-color:#f0f0f0; margin-bottom:10px;">
+        <tr>
+          <td style="width: 50px; table-layout:fixed;"><?php echo $avatar['num']?></td>
+          <td colspan="3" style="width:610px; table-layout:fixed;">
+            <?php if ($avatar['status']==0) {?>
+              <strong style="color:#909090;"><?php echo $avatar['title']?></strong>
+            <?php } else {?>
+              <strong style="color:#2020c0;"><?php echo $avatar['title']?></strong>
+            <?php }?>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="width: 50px; table-layout:fixed;">
+            <?php if ($avatar['status']==0) {?>
+              <strong style="color:#909090;"><?php echo $modlos_invalid?></strong>
+            <?php } else {?>
+              <strong style="color:#109010;"><?php echo $modlos_valid?></strong>
+            <?php }?>
+          </td>
+          <td style="width:260px;table-layout:fixed;">
+            <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_params.'&agent='.$avatar['uuid']?>','','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+              <strong style="color:#105ba7;"><?php echo $avatar['fullname']?></strong>
+            </a>
+          </td>
+          <td style="width: 10px; table-layout:fixed;">&nbsp;</td>
+          <td style="width:340px; table-layout:fixed;">
+            <strong style="color:#404040;"><?php echo $avatar['uuid']?></strong>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="width: 50px; table-layout:fixed;">&nbsp;</td>
+          <td style="width:260px; table-layout:fixed;">
+            <?php if ($avatar['url']) {?>
+              <a href="<?php echo $avatar['url']?>" target="_blank">
+                <img src="<?php echo $avatar['url']?>" width="256" style="margin-bottom:10px;"/></td>
+              </a>
+            <?php } else {?>
+              <img src="<?php echo CMS_MODULE_URL?>/images/info.jpg" width="256" style="margin-bottom:10px;"/>
+            <?php }?>
+          <td style="width: 10px; table-layout:fixed;">&nbsp;</td>
+          <td style="width:340px; table-layout:fixed; word-break:break-all;" valign="top"><?php echo $avatar['html']?></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<table border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="center">
+      <form name="assignform" method="GET"  action="<?php echo $return_url?>">
+        <input type="hidden" name="course"   value="<?php echo $this->course_id;?>" />
+        <input type="submit" name="cancel"   value="<?php echo $modlos_return?>" />
+      </form>
+    </td>
+  </tr>
+</table>
+<br />
+
+<?php } else {?>
+
+<table width="600" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#f0f0f0; margin-top:10px; margin-bottom:10px;">
+  <tr>
+    <td>
+      <?php $mform->display()?>
+    </td>
+  </tr>
+</table>
+<br />
+<?php }?>

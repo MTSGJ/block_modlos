@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="blocks/modlos/db" VERSION="20100921" COMMENT="XMLDB file for Moodle OpenSim blocks/Modlos"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="modlos_users" COMMENT="Modlos Users Data" NEXT="modlos_banned">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="uuid"/>
+        <FIELD NAME="uuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="user_id"/>
+        <FIELD NAME="user_id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="uuid" NEXT="firstname"/>
+        <FIELD NAME="firstname" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false" PREVIOUS="user_id" NEXT="lastname"/>
+        <FIELD NAME="lastname" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false" PREVIOUS="firstname" NEXT="hmregion"/>
+        <FIELD NAME="hmregion" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="lastname" NEXT="state"/>
+        <FIELD NAME="state" TYPE="char" LENGTH="5" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="hmregion" NEXT="time"/>
+        <FIELD NAME="time" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="state"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id" NEXT="uuid"/>
+        <KEY NAME="uuid"     TYPE="unique" FIELDS="uuid" PREVIOUS="id" NEXT="username"/>
+        <KEY NAME="username" TYPE="unique" FIELDS="firstname, lastname" PREVIOUS="uuid"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_banned" COMMENT="Modlos Banned Users Data" PREVIOUS="modlos_users" NEXT="modlos_lastnames">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="uuid"/>
+        <FIELD NAME="uuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="agentinfo"/>
+        <FIELD NAME="agentinfo" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="uuid" NEXT="time"/>
+        <FIELD NAME="time" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="agentinfo"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id"   TYPE="primary" FIELDS="id" NEXT="uuid"/>
+        <KEY NAME="uuid" TYPE="unique" FIELDS="uuid" PREVIOUS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_lastnames" COMMENT="Modlos Last Names Management" PREVIOUS="modlos_banned" NEXT="modlos_group_active">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="lastname"/>
+        <FIELD NAME="lastname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="state"/>
+        <FIELD NAME="state" TYPE="char" LENGTH="5" NOTNULL="true" DEFAULT="1" SEQUENCE="false" PREVIOUS="lastname"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id" NEXT="lastname"/>
+        <KEY NAME="lastname" TYPE="unique" FIELDS="lastname" PREVIOUS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_group_active" COMMENT="Modlos Group Activity" PREVIOUS="modlos_lastname" NEXT="modlos_group_list">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="agentid"/>
+        <FIELD NAME="agentid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="activegroupid"/>
+        <FIELD NAME="activegroupid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" PREVIOUS="agentid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id" NEXT="agentid"/>
+        <KEY NAME="agentid" TYPE="unique" FIELDS="agentid" PREVIOUS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_group_list" COMMENT="Modlos Group List" PREVIOUS="modlos_group_active" NEXT="modlos_group_invite">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="groupid"/>
+        <FIELD NAME="groupid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="groupid" NEXT="charter"/>
+        <FIELD NAME="charter" TYPE="text" LENGTH="medium" NOTNULL="true" SEQUENCE="false" PREVIOUS="name" NEXT="insigniaid"/>
+        <FIELD NAME="insigniaid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" PREVIOUS="charter" NEXT="founderid"/>
+        <FIELD NAME="founderid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" PREVIOUS="insigniaid" NEXT="membershipfee"/>
+        <FIELD NAME="membershipfee" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="founderid" NEXT="openenrollment"/>
+        <FIELD NAME="openenrollment" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="membershipfee" NEXT="showinlist"/>
+        <FIELD NAME="showinlist" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="openenrollment" NEXT="allowpublish"/>
+        <FIELD NAME="allowpublish" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="showinlist" NEXT="maturepublish"/>
+        <FIELD NAME="maturepublish" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="allowpublish" NEXT="ownerroleid"/>
+        <FIELD NAME="ownerroleid" TYPE="char" LENGTH="128" NOTNULL="true" SEQUENCE="false" PREVIOUS="maturepublish"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id" NEXT="groupid"/>
+        <KEY NAME="groupid" TYPE="unique" FIELDS="groupid" PREVIOUS="id" NEXT="name"/>
+        <KEY NAME="name" TYPE="unique" FIELDS="name" PREVIOUS="groupid"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_group_invite" COMMENT="Modlos Group Invite" PREVIOUS="modlos_group_list" NEXT="modlos_group_membership">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="inviteid"/>
+        <FIELD NAME="inviteid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="groupid"/>
+        <FIELD NAME="groupid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" PREVIOUS="inviteid" NEXT="roleid"/>
+        <FIELD NAME="roleid" TYPE="char" LENGTH="64" NOTNULL="false" SEQUENCE="false" PREVIOUS="groupid" NEXT="agentid"/>
+        <FIELD NAME="agentid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" PREVIOUS="roleid" NEXT="tmstamp"/>
+        <FIELD NAME="tmstamp" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="agentid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id" NEXT="inviteid"/>
+        <KEY NAME="inviteid" TYPE="unique" FIELDS="inviteid" PREVIOUS="id" NEXT="groupid"/>
+        <KEY NAME="groupid" TYPE="unique" FIELDS="groupid, roleid, agentid" PREVIOUS="inviteid"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_group_membership" COMMENT="Modlos Group Membership" PREVIOUS="modlos_group_invite" NEXT="modlos_group_notice">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="groupid"/>
+        <FIELD NAME="groupid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="agentid"/>
+        <FIELD NAME="agentid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" PREVIOUS="groupid" NEXT="selectedroleid"/>
+        <FIELD NAME="selectedroleid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" PREVIOUS="agentid" NEXT="contribution"/>
+        <FIELD NAME="contribution" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="selectedroleid" NEXT="listinprofile"/>
+        <FIELD NAME="listinprofile" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="1" SEQUENCE="false" PREVIOUS="contribution" NEXT="acceptnotices"/>
+        <FIELD NAME="acceptnotices" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="1" SEQUENCE="false" PREVIOUS="listinprofile"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id" NEXT="groupid"/>
+        <KEY NAME="groupid" TYPE="unique" FIELDS="groupid, agentid" PREVIOUS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_group_notice" COMMENT="Modlos Group Notice" PREVIOUS="modlos_group_membership" NEXT="modlos_group_rolemembership">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="groupid"/>
+        <FIELD NAME="groupid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="noticeid"/>
+        <FIELD NAME="noticeid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" PREVIOUS="groupid" NEXT="timestamp"/>
+        <FIELD NAME="timestamp" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="noticeid" NEXT="fromname"/>
+        <FIELD NAME="fromname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="timestamp" NEXT="subject"/>
+        <FIELD NAME="subject" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="fromname" NEXT="message"/>
+        <FIELD NAME="message" TYPE="text" LENGTH="medium" NOTNULL="true" SEQUENCE="false" PREVIOUS="subject" NEXT="binarybucket"/>
+        <FIELD NAME="binarybucket" TYPE="binary" LENGTH="medium" NOTNULL="true" SEQUENCE="false" PREVIOUS="message"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id" NEXT="groupid"/>
+        <KEY NAME="groupid" TYPE="unique" FIELDS="groupid, noticeid" PREVIOUS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="timestamp" UNIQUE="false" FIELDS="timestamp"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="modlos_group_rolemembership" COMMENT="Modlos Group Role Membership" PREVIOUS="modlos_group_notice" NEXT="modlos_group_role">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="groupid"/>
+        <FIELD NAME="groupid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="roleid"/>
+        <FIELD NAME="roleid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" PREVIOUS="groupid" NEXT="agentid"/>
+        <FIELD NAME="agentid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" PREVIOUS="roleid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id" NEXT="groupid"/>
+        <KEY NAME="groupid" TYPE="unique" FIELDS="groupid, roleid, agentid" PREVIOUS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_group_role" COMMENT="Modlos Group Role" PREVIOUS="modlos_group_rolemembership" NEXT="modlos_offline_message">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="groupid"/>
+        <FIELD NAME="groupid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="roleid"/>
+        <FIELD NAME="roleid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" PREVIOUS="groupid" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="roleid" NEXT="description"/>
+        <FIELD NAME="description" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="name" NEXT="title"/>
+        <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="description" NEXT="powers"/>
+        <FIELD NAME="powers" TYPE="int" LENGTH="20" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="title"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id" NEXT="groupid"/>
+        <KEY NAME="groupid" TYPE="unique" FIELDS="groupid, roleid" PREVIOUS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_offline_message" COMMENT="Modlos Offline Message" PREVIOUS="modlos_group_role" NEXT="modlos_profile_classifieds">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="to_uuid"/>
+        <FIELD NAME="to_uuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="from_uuid"/>
+        <FIELD NAME="from_uuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="to_uuid" NEXT="message"/>
+        <FIELD NAME="message" TYPE="text" LENGTH="big" NOTNULL="true" SEQUENCE="false" PREVIOUS="from_uuid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="to_uuid" UNIQUE="false" FIELDS="to_uuid"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="modlos_profile_classifieds" COMMENT="Modlos Profile Classifieds" PREVIOUS="modlos_offline_message" NEXT="modlos_profile_usernotes">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="classifieduuid"/>
+        <FIELD NAME="classifieduuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="creatoruuid"/>
+        <FIELD NAME="creatoruuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="classifieduuid" NEXT="creationdate"/>
+        <FIELD NAME="creationdate" TYPE="int" LENGTH="20" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="creatoruuid" NEXT="expirationdate"/>
+        <FIELD NAME="expirationdate" TYPE="int" LENGTH="20" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="creationdate" NEXT="category"/>
+        <FIELD NAME="category" TYPE="char" LENGTH="20" NOTNULL="true" SEQUENCE="false" PREVIOUS="expirationdate" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="category" NEXT="description"/>
+        <FIELD NAME="description" TYPE="text" LENGTH="big" NOTNULL="true" SEQUENCE="false" PREVIOUS="name" NEXT="parceluuid"/>
+        <FIELD NAME="parceluuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="description" NEXT="parentestate"/>
+        <FIELD NAME="parentestate" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="parceluuid" NEXT="snapshotuuid"/>
+        <FIELD NAME="snapshotuuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="parentestate" NEXT="simname"/>
+        <FIELD NAME="simname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="snapshotuuid" NEXT="posglobal"/>
+        <FIELD NAME="posglobal" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="simname" NEXT="parcelname"/>
+        <FIELD NAME="parcelname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="posglobal" NEXT="classifiedflags"/>
+        <FIELD NAME="classifiedflags" TYPE="int" LENGTH="8" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="parcelname" NEXT="priceforlisting"/>
+        <FIELD NAME="priceforlisting" TYPE="int" LENGTH="5" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="classifiedflags"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id" NEXT="classifieduuid"/>
+        <KEY NAME="classifieduuid" TYPE="unique" FIELDS="classifieduuid" PREVIOUS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_profile_usernotes" COMMENT="Modlos Profile User Notes" PREVIOUS="modlos_profile_classifieds" NEXT="modlos_profile_userpicks">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="useruuid"/>
+        <FIELD NAME="useruuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="targetuuid"/>
+        <FIELD NAME="targetuuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="useruuid" NEXT="notes"/>
+        <FIELD NAME="notes" TYPE="text" LENGTH="big" NOTNULL="true" SEQUENCE="false" PREVIOUS="targetuuid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id" NEXT="useruuid"/>
+        <KEY NAME="useruuid" TYPE="unique" FIELDS="useruuid, targetuuid" PREVIOUS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_profile_userpicks" COMMENT="Modlos Profile User Picks" PREVIOUS="modlos_profile_usernotes" NEXT="modlos_profile_userprofile">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="pickuuid"/>
+        <FIELD NAME="pickuuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="creatoruuid"/>
+        <FIELD NAME="creatoruuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="pickuuid" NEXT="toppick"/>
+        <FIELD NAME="toppick" TYPE="char" LENGTH="6" NOTNULL="true" DEFAULT="false" SEQUENCE="false" PREVIOUS="creatoruuid" NEXT="parceluuid"/>
+        <FIELD NAME="parceluuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="toppick" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="parceluuid" NEXT="description"/>
+        <FIELD NAME="description" TYPE="text" LENGTH="big" NOTNULL="true" SEQUENCE="false" PREVIOUS="name" NEXT="snapshotuuid"/>
+        <FIELD NAME="snapshotuuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="description" NEXT="user"/>
+        <FIELD NAME="user" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="snapshotuuid" NEXT="originalname"/>
+        <FIELD NAME="originalname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="user" NEXT="simname"/>
+        <FIELD NAME="simname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="originalname" NEXT="posglobal"/>
+        <FIELD NAME="posglobal" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="simname" NEXT="sortorder"/>
+        <FIELD NAME="sortorder" TYPE="int" LENGTH="2" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="posglobal" NEXT="enabled"/>
+        <FIELD NAME="enabled" TYPE="char" LENGTH="6" NOTNULL="true" DEFAULT="false" SEQUENCE="false" PREVIOUS="sortorder"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id" NEXT="pickuuid"/>
+        <KEY NAME="pickuuid" TYPE="unique" FIELDS="pickuuid" PREVIOUS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_profile_userprofile" COMMENT="Modlos Profile User Profile" PREVIOUS="modlos_profile_userpicks" NEXT="modlos_profile_usersettings">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="useruuid"/>
+        <FIELD NAME="useruuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="profilepartner"/>
+        <FIELD NAME="profilepartner" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="useruuid" NEXT="profileimage"/>
+        <FIELD NAME="profileimage" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="profilepartner" NEXT="profileabouttext"/>
+        <FIELD NAME="profileabouttext" TYPE="text" LENGTH="big" NOTNULL="true" SEQUENCE="false" PREVIOUS="profileimage" NEXT="profileallowpublish"/>
+        <FIELD NAME="profileallowpublish" TYPE="binary" LENGTH="small" NOTNULL="true" SEQUENCE="false" PREVIOUS="profileabouttext" NEXT="profilematurepublish"/>
+        <FIELD NAME="profilematurepublish" TYPE="binary" LENGTH="small" NOTNULL="true" SEQUENCE="false" PREVIOUS="profileallowpublish" NEXT="profileurl"/>
+        <FIELD NAME="profileurl" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="profilematurepublish" NEXT="profilewanttomask"/>
+        <FIELD NAME="profilewanttomask" TYPE="int" LENGTH="3" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="profileurl" NEXT="profilewanttotext"/>
+        <FIELD NAME="profilewanttotext" TYPE="text" LENGTH="medium" NOTNULL="true" SEQUENCE="false" PREVIOUS="profilewanttomask" NEXT="profileskillsmask"/>
+        <FIELD NAME="profileskillsmask" TYPE="int" LENGTH="3" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="profilewanttotext" NEXT="profileskillstext"/>
+        <FIELD NAME="profileskillstext" TYPE="text" LENGTH="medium" NOTNULL="true" SEQUENCE="false" PREVIOUS="profileskillsmask" NEXT="profilelanguagestext"/>
+        <FIELD NAME="profilelanguagestext" TYPE="text" LENGTH="medium" NOTNULL="true" SEQUENCE="false" PREVIOUS="profileskillstext" NEXT="profilefirstimage"/>
+        <FIELD NAME="profilefirstimage" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="profilelanguagestext" NEXT="profilefirsttext"/>
+        <FIELD NAME="profilefirsttext" TYPE="text" LENGTH="big" NOTNULL="true" SEQUENCE="false" PREVIOUS="profilefirstimage"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id" NEXT="useruuid"/>
+        <KEY NAME="useruuid" TYPE="unique" FIELDS="useruuid" PREVIOUS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_profile_usersettings" COMMENT="Modlos Profile User Settings" PREVIOUS="modlos_profile_userprofile" NEXT="modlos_mute_list">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="useruuid"/>
+        <FIELD NAME="useruuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="imviaemail"/>
+        <FIELD NAME="imviaemail" TYPE="char" LENGTH="6" NOTNULL="true" DEFAULT="false" SEQUENCE="false" PREVIOUS="useruuid" NEXT="visible"/>
+        <FIELD NAME="visible" TYPE="char" LENGTH="6" NOTNULL="true" DEFAULT="true" SEQUENCE="false" PREVIOUS="imviaemail" NEXT="email"/>
+        <FIELD NAME="email" TYPE="char" LENGTH="254" NOTNULL="true" SEQUENCE="false" PREVIOUS="visible"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id" NEXT="useruuid"/>
+        <KEY NAME="useruuid" TYPE="unique" FIELDS="useruuid" PREVIOUS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_mute_list" COMMENT="Modlos Mute List Table" PREVIOUS="modlos_profile_usersettings" NEXT="modlos_login_screen">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="agentid"/>
+        <FIELD NAME="agentid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="muteid"/>
+        <FIELD NAME="muteid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="agentid" NEXT="mutename"/>
+        <FIELD NAME="mutename" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="muteid" NEXT="mutetype"/>
+        <FIELD NAME="mutetype" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="mutename" NEXT="muteflags"/>
+        <FIELD NAME="muteflags" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="mutetype" NEXT="timestamp"/>
+        <FIELD NAME="timestamp" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="muteflags"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_login_screen" COMMENT="Login Screen Alert Information Box" PREVIOUS="modlos_mute_list" NEXT="modlos_search_allparcels">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="title"/>
+        <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="information"/>
+        <FIELD NAME="information" TYPE="text" LENGTH="big" NOTNULL="true" SEQUENCE="false" PREVIOUS="title" NEXT="bordercolor"/>
+        <FIELD NAME="bordercolor" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="white" SEQUENCE="false" PREVIOUS="information" NEXT="timestamp"/>
+        <FIELD NAME="timestamp" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="bordercolor"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_search_allparcels" COMMENT="All Parcels" PREVIOUS="modlos_login_screen" NEXT="modlos_search_events">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="regionuuid"/>
+        <FIELD NAME="regionuuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="parcelname"/>
+        <FIELD NAME="parcelname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="regionuuid" NEXT="owneruuid"/>
+        <FIELD NAME="owneruuid" TYPE="char" LENGTH="36" NOTNULL="true" DEFAULT="00000000-0000-0000-0000-000000000000" SEQUENCE="false" PREVIOUS="parcelname" NEXT="groupuuid"/>
+        <FIELD NAME="groupuuid" TYPE="char" LENGTH="36" NOTNULL="true" DEFAULT="00000000-0000-0000-0000-000000000000" SEQUENCE="false" PREVIOUS="owneruuid" NEXT="landingpoint"/>
+        <FIELD NAME="landingpoint" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="groupuuid" NEXT="parceluuid"/>
+        <FIELD NAME="parceluuid" TYPE="char" LENGTH="36" NOTNULL="true" DEFAULT="00000000-0000-0000-0000-000000000000" SEQUENCE="false" PREVIOUS="landingpoint" NEXT="infouuid"/>
+        <FIELD NAME="infouuid" TYPE="char" LENGTH="36" NOTNULL="true" DEFAULT="00000000-0000-0000-0000-000000000000" SEQUENCE="false" PREVIOUS="parceluuid" NEXT="parcelarea"/>
+        <FIELD NAME="parcelarea" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="infouuid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="parceluuid"/>
+        <KEY NAME="parceluuid" TYPE="unique" FIELDS="parceluuid" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_search_events" COMMENT="Events Table for Search" PREVIOUS="modlos_search_allparcels" NEXT="modlos_search_hostsregister">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="uid"/>
+        <FIELD NAME="uid" TYPE="int" LENGTH="8" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="id" NEXT="owneruuid"/>
+        <FIELD NAME="owneruuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="uid" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="owneruuid" NEXT="eventid"/>
+        <FIELD NAME="eventid" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="name" NEXT="creatoruuid"/>
+        <FIELD NAME="creatoruuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="eventid" NEXT="category"/>
+        <FIELD NAME="category" TYPE="int" LENGTH="2" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="creatoruuid" NEXT="description"/>
+        <FIELD NAME="description" TYPE="text" LENGTH="medium" NOTNULL="true" SEQUENCE="false" PREVIOUS="category" NEXT="dateutc"/>
+        <FIELD NAME="dateutc" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="description" NEXT="duration"/>
+        <FIELD NAME="duration" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="dateutc" NEXT="covercharge"/>
+        <FIELD NAME="covercharge" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="duration" NEXT="coveramount"/>
+        <FIELD NAME="coveramount" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="covercharge" NEXT="simname"/>
+        <FIELD NAME="simname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="coveramount" NEXT="globalpos"/>
+        <FIELD NAME="globalpos" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="simname" NEXT="eventflags"/>
+        <FIELD NAME="eventflags" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="globalpos"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_search_hostsregister" COMMENT="Hosts Register" PREVIOUS="modlos_search_events" NEXT="modlos_search_objects">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="host"/>
+        <FIELD NAME="host" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="port"/>
+        <FIELD NAME="port" TYPE="int" LENGTH="5" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="host" NEXT="register"/>
+        <FIELD NAME="register" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="port" NEXT="nextcheck"/>
+        <FIELD NAME="nextcheck" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="register" NEXT="checked"/>
+        <FIELD NAME="checked" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="nextcheck" NEXT="failcounter"/>
+        <FIELD NAME="failcounter" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="checked"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="host"/>
+        <KEY NAME="host" TYPE="unique" FIELDS="host, port" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_search_objects" COMMENT="Objects Table" PREVIOUS="modlos_search_hostsregister" NEXT="modlos_search_parcels">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="objectuuid"/>
+        <FIELD NAME="objectuuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="parceluuid"/>
+        <FIELD NAME="parceluuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="objectuuid" NEXT="location"/>
+        <FIELD NAME="location" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="parceluuid" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="location" NEXT="description"/>
+        <FIELD NAME="description" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="name" NEXT="regionuuid"/>
+        <FIELD NAME="regionuuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="description"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="uuid"/>
+        <KEY NAME="uuid" TYPE="unique" FIELDS="objectuuid, parceluuid" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_search_parcels" COMMENT="Parcels" PREVIOUS="modlos_search_objects" NEXT="modlos_search_parcelsales">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="regionuuid"/>
+        <FIELD NAME="regionuuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="parcelname"/>
+        <FIELD NAME="parcelname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="regionuuid" NEXT="parceluuid"/>
+        <FIELD NAME="parceluuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="parcelname" NEXT="landingpoint"/>
+        <FIELD NAME="landingpoint" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="parceluuid" NEXT="description"/>
+        <FIELD NAME="description" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="landingpoint" NEXT="searchcategory"/>
+        <FIELD NAME="searchcategory" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" PREVIOUS="description" NEXT="build"/>
+        <FIELD NAME="build" TYPE="char" LENGTH="6" NOTNULL="true" DEFAULT="false" SEQUENCE="false" PREVIOUS="searchcategory" NEXT="script"/>
+        <FIELD NAME="script" TYPE="char" LENGTH="6" NOTNULL="true" DEFAULT="false" SEQUENCE="false" PREVIOUS="build" NEXT="public"/>
+        <FIELD NAME="public" TYPE="char" LENGTH="6" NOTNULL="true" DEFAULT="false" SEQUENCE="false" PREVIOUS="script" NEXT="dwell"/>
+        <FIELD NAME="dwell" TYPE="number" LENGTH="20" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" DECIMALS="8" PREVIOUS="public" NEXT="infouuid"/>
+        <FIELD NAME="infouuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="dwell" NEXT="mature"/>
+        <FIELD NAME="mature" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="PG" SEQUENCE="false" PREVIOUS="infouuid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="uuid"/>
+        <KEY NAME="uuid" TYPE="unique" FIELDS="regionuuid, parceluuid" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_search_parcelsales" COMMENT="Parcel Sales" PREVIOUS="modlos_search_parcels" NEXT="modlos_search_popularplaces">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="regionuuid"/>
+        <FIELD NAME="regionuuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="parcelname"/>
+        <FIELD NAME="parcelname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="regionuuid" NEXT="parceluuid"/>
+        <FIELD NAME="parceluuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="parcelname" NEXT="area"/>
+        <FIELD NAME="area" TYPE="int" LENGTH="6" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="parceluuid" NEXT="saleprice"/>
+        <FIELD NAME="saleprice" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="area" NEXT="landingpoint"/>
+        <FIELD NAME="landingpoint" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="saleprice" NEXT="infouuid"/>
+        <FIELD NAME="infouuid" TYPE="char" LENGTH="36" NOTNULL="true" DEFAULT="00000000-0000-0000-0000-000000000000" SEQUENCE="false" PREVIOUS="landingpoint" NEXT="dwell"/>
+        <FIELD NAME="dwell" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="infouuid" NEXT="parentestate"/>
+        <FIELD NAME="parentestate" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="1" SEQUENCE="false" PREVIOUS="dwell" NEXT="mature"/>
+        <FIELD NAME="mature" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="PG" SEQUENCE="false" PREVIOUS="parentestate"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="uuid"/>
+        <KEY NAME="uuid" TYPE="unique" FIELDS="regionuuid, parceluuid" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_search_popularplaces" COMMENT="Popular Places" PREVIOUS="modlos_search_parcelsales" NEXT="modlos_search_regions">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="regionuuid"/>
+        <FIELD NAME="regionuuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="regionuuid" NEXT="dwell"/>
+        <FIELD NAME="dwell" TYPE="number" LENGTH="20" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" DECIMALS="8" PREVIOUS="name" NEXT="infouuid"/>
+        <FIELD NAME="infouuid" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false" PREVIOUS="dwell" NEXT="has_picture"/>
+        <FIELD NAME="has_picture" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="infouuid" NEXT="mature"/>
+        <FIELD NAME="mature" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="has_picture"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+
+    <TABLE NAME="modlos_search_regions" COMMENT="Region Search" PREVIOUS="modlos_search_popularplaces" NEXT="modlos_template_avatars">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="regionname"/>
+        <FIELD NAME="regionname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="regionuuid"/>
+        <FIELD NAME="regionuuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="regionname" NEXT="regionhandle"/>
+        <FIELD NAME="regionhandle" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="regionuuid" NEXT="url"/>
+        <FIELD NAME="url" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="regionhandle" NEXT="owner"/>
+        <FIELD NAME="owner" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="url" NEXT="owneruuid"/>
+        <FIELD NAME="owneruuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="owner"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="regionuuid"/>
+        <KEY NAME="regionuuid" TYPE="unique" FIELDS="regionuuid" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_template_avatars" COMMENT="Template Avatars Informatoin" PREVIOUS="modlos_search_regions">
+      <FIELDS>
+        <FIELD NAME="id"        TYPE="int"  LENGTH="10"  NOTNULL="true" SEQUENCE="true"  UNSIGNED="true"     NEXT="num"/>
+        <FIELD NAME="num"       TYPE="int"  LENGTH="10"  NOTNULL="true" SEQUENCE="false" PREVIOUS="id"       NEXT="title"/>
+        <FIELD NAME="title"     TYPE="char" LENGTH="128" NOTNULL="true" SEQUENCE="false" PREVIOUS="num"      NEXT="uuid"/>
+        <FIELD NAME="uuid"      TYPE="char" LENGTH="36"  NOTNULL="true" SEQUENCE="false" PREVIOUS="title"    NEXT="text"/>
+        <FIELD NAME="text"      TYPE="text"              NOTNULL="true" SEQUENCE="false" PREVIOUS="uuid"     NEXT="format"/>
+        <FIELD NAME="format"    TYPE="int"  LENGTH="4"   NOTNULL="true" SEQUENCE="false" PREVIOUS="text"     NEXT="fileid"/>
+        <FIELD NAME="fileid"    TYPE="int"  LENGTH="10"  NOTNULL="true" SEQUENCE="false" PREVIOUS="format"   NEXT="filename"/>
+        <FIELD NAME="filename"  TYPE="char" LENGTH="128" NOTNULL="true" SEQUENCE="false" PREVIOUS="fileid"   NEXT="itemid"/>
+        <FIELD NAME="itemid"    TYPE="int"  LENGTH="10"  NOTNULL="true" SEQUENCE="false" PREVIOUS="filename" NEXT="timestamp"/>
+        <FIELD NAME="timestamp" TYPE="int"  LENGTH="11"  NOTNULL="true" SEQUENCE="false" UNSIGNED="true"  DEFAULT="0" PREVIOUS="itemid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>

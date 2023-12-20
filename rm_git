@@ -1,0 +1,5 @@
+find . -name .svn |xargs rm -fr
+find . -name .git |xargs rm -fr
+find . -name chk |xargs rm -f
+rm -f commit update setup_opensim
+

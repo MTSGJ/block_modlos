@@ -1,0 +1,245 @@
+<style type="text/css">
+  <?php include(CMS_MODULE_PATH."/html/html.css")?>
+</style>
+
+
+<h2><center>
+<?php if (!$is_avatar_max) {?>
+  <?php echo $grid_name."&nbsp;:&nbsp;".$avatar_create_ttl?>
+<?php } else {?>
+  <?php echo $grid_name."&nbsp;:&nbsp;".$template_ttl?>
+<?php }?>
+</center></h2>
+
+
+<!-- echo Messages -->
+<?php if ($this->hasError) {?>
+  <div align="center" style="margin-bottom:10px;">
+    <ul style="list-style:none;">
+      <?php foreach($this->errorMsg as $mesg) {?>
+        <li><strong style="color: #f02022;"><?php echo $mesg?></strong></li>
+      <?php }?>
+    </ul>
+  </div>
+<?php }?>
+
+
+<?php if ($this->created_avatar) {?>
+
+  <!-- POST -->
+  <div align="center" style="margin-bottom:10px;">
+    <h4 style="color: #1010e0;"><?php echo $avatar_created?></h4>
+  </div>
+
+  <table width="640" border="0" align="center" cellpadding="0" cellspacing="0" style="background-color:#ffffff;">
+    <?php if ($hasPermit) {?>
+      <tr>
+        <td width="180" class="head"><?php echo $uuid_ttl?></td>
+        <td width="460" class="even" style="color: #2060b0;"><?php echo $this->UUID?></td>
+      </tr>
+    <?php }?>
+    <tr>
+      <td width="180" class="head"><?php echo $firstname_ttl?></td>
+      <td width="460" class="odd" ><?php echo $this->firstname?></td>
+    </tr>
+    <tr>
+      <td class="head"><?php echo $lastname_ttl?></td>
+      <td class="even"><?php echo $this->lastname?></td>
+    </tr>
+    <tr>
+      <td class="head"><?php echo $home_region_ttl?></td>
+      <td class="odd" ><?php echo $this->hmregion?></td>
+    </tr>
+
+    <?php if ($use_template and $total_num>0 and $this->base_avatar_ttl!='') {?>
+      <tr>
+        <td class="head"><?php echo $template_ttl?></td>
+        <td class="odd" ><?php echo $this->base_avatar_ttl?></td>
+      </tr>
+    <?php }?>
+
+    <?php if ($hasPermit) {?>
+      <tr>
+        <td class="head"><?php echo $ownername_ttl?></td>
+        <td class="even"><?php echo $this->ownername?></td>
+      </tr>
+    <?php }?>
+  </table>
+
+  <table border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+      <td align="center">
+        <?php if ($is_avatar_max) {?>
+        <form name="assignform" method="GET"  action="<?php echo $this->return_url?>">
+        <?php } else {?>
+        <form name="assignform" method="GET"  action="<?php echo $this->action_url?>">
+        <?php }?>
+          <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+          <input type="hidden" name="action"  value="personal" />
+          <input type="hidden" name="userid"  value="<?php echo $USER->id?>" />
+          <input type="submit" name="return"  value="<?php echo $return_ttl?>" />
+        </form>
+      </td>
+    </tr>
+  </table>
+
+<?php } else {?>
+
+  <!-- GET -->
+  <form action="<?php echo $this->action_url?>" method="POST">
+    <?php if (!$is_avatar_max) {?>
+    <table width="640" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-bottom:10px; table-layout:fixed; background-color:#ffffff;">
+      <tbody>
+        <?php if ($hasPermit) {?>
+          <tr>
+            <td width="120" class="head" style="table-layout:fixed;"><?php echo $uuid_ttl?></td>
+            <td width="500" class="even" style="table-layout:fixed;">
+              <input name="UUID" id="UUID" size="52" maxlength="36" value="<?php echo $this->nx_UUID?>" />
+            </td>
+          </tr>
+        <?php }?>
+
+        <tr>
+          <td width="120" class="head" style="table-layout:fixed;"><?php echo $firstname_ttl?></td>
+          <td width="500" class="even" style="table-layout:fixed;">
+            <input name="firstname" id="firstname" size="32" maxlength="30" value="<?php echo $pv_firstname?>" />
+          </td>
+        </tr>
+
+        <tr>
+          <td class="head"><?php echo $lastname_ttl?></td>
+          <td class="odd">
+            <?php if ($this->actvLastName==AVATAR_LASTN_ACTIVE) {?>
+              <select class="box" wide="25" name="lastname">
+                <?php foreach ($this->lastNames as $lname) {?>
+                  <?php if ($lname==$pv_lastname) {?>
+                    <option value="<?php echo $lname?>" selected><?php echo $lname?></option>
+                  <?php } else {?>
+                    <option value="<?php echo $lname?>" ><?php echo $lname?></option>
+                  <?php }?> 
+                <?php }?>
+              </select>
+            <?php } else {?>
+              <input name="lastname" size="32" maxlength="30" value="<?php echo $pv_lastname?>" />
+            <?php }?>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="head"><?php echo $passwd_ttl?></td>
+          <td class="even"><input type="password" name="passwd" size="32" maxlength="16" value="" /></td>
+        </tr>
+
+        <tr>
+          <td class="head"><?php echo $confirm_pass_ttl?></td>
+          <td class="odd"><input type="password" name="confirm_pass" size="32" maxlength="16" value="" /></td>
+        </tr>
+
+        <tr>
+          <td class="head"><?php echo $home_region_ttl?></td>
+          <td class="even">
+            <select wide="25" name="hmregion">
+              <?php foreach ($this->regionNames as $region) {?>
+                <?php if ($region==$this->hmregion) {?>
+                  <option value="<?php echo $region?>" selected><?php echo $region?></option>
+                <?php } else {?>
+                  <option value="<?php echo $region?>" ><?php echo $region?></option>
+                <?php }?>
+              <?php }?>
+            </select>
+          </td>
+        </tr>
+
+        <?php if ($this->use_sloodle and $this->sloodle_num==0) {?>
+          <tr>
+            <td class="head"><?php echo $sloodle_ttl?></td>
+            <td class="odd "><input name="sloodle" type="checkbox" value="sloodle" />&nbsp;<?php echo $manage_sloodle?></td>
+          </tr>
+        <?php }?>
+
+        <?php if ($hasPermit) {?>
+          <tr>
+            <td class="head"><?php echo $ownername_ttl?></td>
+            <td class="even"><input name="ownername" size="32" maxlength="30" value="<?php echo $pv_ownername?>" /></td>
+          </tr>
+        <?php }?>
+
+        <?php if ($this->isDisclaimer and !$hasPermit) {?>
+          <tr>
+            <td class="head" vAlign="top"><?php echo $disclaimer_ttl?></td>
+            <td class="odd">
+              <textarea name="disclaimer" cols="64" rows="8" readonly="readonly"><?php echo $disclaimer?></textarea>
+              <label><input name="agree" type="checkbox" value="agree"  />&nbsp;<?php echo $disclaim_agree?></label>
+            </td>
+          </tr>
+        <?php } else {?>
+          <input type="hidden" name="agree" value="agree" />
+        <?php }?>
+
+      </tbody>
+    </table>
+    <?php }?>
+
+    <!-- Template Avatar -->
+    <?php if ($use_template and $total_num>0) {?>
+      <?php if (!$is_avatar_max and ($valid_num>0 or $hasPermit)) {?>
+      <br />
+      <table width="640" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#f0f0f0; margin-bottom:10px;">
+        <tr>
+          <td width=80% class="head" align="center"><strong style="color:#116644;"><?php echo $select_avatar_ttl?></strong></td>
+        </tr>
+      </table>
+      <?php }?>
+
+      <table width="640" border="0" align="center" cellpadding="2" cellspacing="2" style="margin-bottom:10px; table-layout:fixed;">
+        <tr>
+          <td class="generalboxcontent" width="640" style="table-layout:fixed;">
+            <?php $num=0; foreach($avatars as $avatar) {?>
+            <?php if ($avatar['status']>0 or $hasPermit) {?>
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color:#f0f0f0; margin-bottom:10px;">
+              <tr>
+                <td style="width: 30px; table-layout:fixed;" align="center">
+                  <input type="radio" name="select_num" value="<?php echo $num?>" <?php if ($num==$select_num) echo 'checked'?> />
+                </td>
+                <td colspan="3" style="width:610px; table-layout:fixed;">
+                  <?php if ($avatar['status']==0) {?>
+                    <strong style="color:#909090;"><?php echo $avatar['title'].' ('.$invalid_ttl.')'?></strong>
+                  <?php } else {?>
+                    <strong style="color:#2020c0;"><?php echo $avatar['title']?></strong>
+                  <?php }?>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 30px; table-layout:fixed;">&nbsp;</td>
+                <td style="width:260px; table-layout:fixed;">
+                  <?php if ($avatar['url']) {?>
+                    <a href="<?php echo $avatar['url']?>" target="_blank">
+                      <img src="<?php echo $avatar['url']?>" width="256" style="margin-bottom:10px;"/></td>
+                    </a>
+                  <?php } else {?>
+                    <img src="<?php echo CMS_MODULE_URL?>/images/info.jpg" width="256" style="margin-bottom:10px;"/>
+                  <?php }?>
+                </td>
+                <td style="width: 10px; table-layout:fixed;">&nbsp;</td>
+                <td style="width:340px; table-layout:fixed; word-break:break-all;" valign="top"><?php echo $avatar['html']?></td>
+              </tr>
+            </table>
+            <?php }?>
+            <?php $num++; }?>
+          </td>
+        </tr>
+      </table>
+    <?php }?>
+
+    <?php if (!$is_avatar_max) {?>
+    <div align="center">
+      <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+      <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
+      <input type="submit" value="<?php echo $create_ttl?>" />
+      <input type="reset"  value="<?php echo $reset_ttl?>" style="margin-left:30px;"/>
+    </div>
+    <?php }?>
+
+  </form>
+<?php }?>
+<br />

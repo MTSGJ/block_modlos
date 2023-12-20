@@ -1,0 +1,175 @@
+<html>
+<head>
+
+<style type="text/css">
+.styleTitel {
+	font-size: 16px;
+	font-weight: bold;
+	color: #105ba7;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.styleText {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #444444;
+}
+.styleTopTitle {
+	font-size: 20px; 
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.styleOnline {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #009900;
+}
+.styleOffline {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #cc0000;
+}
+.styleplace {
+	color: #ffffff;
+	font-size: 3px;
+}
+</style>
+
+<title><?php echo $grid_name."&nbsp;:&nbsp;".$user_info_ttl?></title>
+</head>
+
+
+<body>
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr><td colspan="2" valign="top"><span class="styleTopTitle"><?php echo $grid_name."&nbsp;:&nbsp;".$avatar_info_ttl?></span></td></tr>
+  <tr><td colspan="2" valign="top"><hr /></td></tr>
+  <tr>
+    <td width="55%" valign="top">
+      <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>
+          <span class="styleTitel"><?php echo $user_ttl.":&nbsp;".htmlspecialchars($firstN)."&nbsp;&nbsp;".htmlspecialchars($lastN)?></span>
+        </td></tr>
+
+        <?php if ($hasPermit or $editPermit) {?>
+          <tr><td>&nbsp;</td></tr>
+          <tr><td class="styleText">
+            <strong><?php echo $uuid_ttl.":&nbsp;"?></strong>
+            <strong style="color:#cc2020;"><?php echo $UUID?></strong>
+          </td></tr>
+        <?php }?>
+
+        <tr><td>&nbsp;</td></tr>
+        <tr><td class="styleText">
+         <strong><?php echo $born_on_ttl.":&nbsp;"?></strong>
+         <strong style="color:#000055;"><?php echo $born?></strong>
+        </td></tr>
+
+        <tr><td>&nbsp;</td></tr>
+        <tr><td class="styleText">
+          <strong><?php echo $lastlogin_ttl.":&nbsp;"?></strong>
+          <strong style="color:#115500;"><?php echo $lastin?></strong>
+        </td></tr>
+
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+          <td class="styleText"><strong><?php echo $ownername_ttl.":&nbsp;"?></strong>
+            <strong style="color: #105ba7;">
+            <?php if ($userinfo and $owner!=' - ') {?>
+              <a href="<?php echo $CFG->wwwroot.'/user/view.php?id='.$userid.$url_amp?>" target="_blank">
+                <?php echo htmlspecialchars($owner)?>
+              </a>
+            <?php } else {?>
+              <?php echo $owner?>
+            <?php }?>
+            </style></strong>
+          </td>
+        </tr>
+
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+          <td class="styleText"><strong><?php echo $status_ttl?>:&nbsp;
+            <?php if (!($state&AVATAR_STATE_SYNCDB)) {?>
+              <strong style="color: #c00;"><?php echo $not_syncdb_ttl?>
+            <?php } elseif ($state&AVATAR_STATE_INACTIVE) {?>
+              <strong style="color: #c00;"><?php echo $inactive_ttl?>
+            <?php } elseif ($state&AVATAR_STATE_SYNCDB) {?>
+              <strong style="color: #008;"><?php echo $active_ttl?>
+            <?php }?>
+              </strong>
+            <?php if ($state&AVATAR_STATE_SLOODLE and $owner!=' - ' and $use_sloodle) {?>
+              <strong style="color: #662;">&nbsp;(<?php echo $sloodle_ttl?>)</strong>
+            <?php }?>
+
+            <?php if ($agentOnline) {?>
+              &nbsp;<span class='styleOnline'>[<?php echo $online_ttl?>]</span>
+            <?php } else {?>
+              &nbsp;<span class='styleOffline'>[<?php echo $offline_ttl?>]</span>
+            <?php }?>
+            </strong>
+          </td>
+        </tr>
+
+        <tr><td class="styleText">&nbsp;</td></tr>
+        <tr>
+          <?php if ($regionName=='' and $hgName!='') {?>
+            <td class="styleText">
+              <strong><?php echo $hyper_grid_ttl?>:&nbsp;</strong>
+              <strong style="color: #008;"><?php echo $hgName?></strong>
+            </strong></td>
+          <?php } else {?>
+            <td class="styleText">
+              <strong><?php echo $home_region_ttl?>:&nbsp;</strong>
+              <strong style="color: #105ba7;">
+              <a href="<?php echo CMS_MODULE_URL.'/helper/sim.php?region='.$regionUUID.$url_amp?>">
+                <?php echo $regionName?>
+              </a>
+            </strong></td>
+          <?php }?>
+        </tr>
+
+        <tr><td>&nbsp;</td></tr>
+        <tr><td><span class="styleText"><strong><?php echo $profile_ttl?>:</strong></span></td></tr>
+        <tr><td><span class="styleplace">.</span></td></tr>
+        <tr>
+          <td><span class="styleText">
+            <?php if ($profileText!="") {?>
+              <?php echo htmlspecialchars($profileText)?>
+            <?php } else {?>
+              <?php 
+                if ($hgName!='') echo $hg_profile;
+                else             echo $has_noprofile;
+              ?>
+            <?php }?>
+          </span></td>
+        </tr>
+
+        <tr><td>&nbsp;</td></tr>
+      </table>
+    </td>
+
+    <td width="45%" valign="top">
+      <table border="0" align="center" cellpadding="5" cellspacing="0">
+        <tr>
+          <td>
+            <div align="center">
+              <table width="256" height="256" border="0" align="center" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td bgcolor="#ffffff">
+                  <?php if ($profileImage=='') {?>
+                    <img src="<?php echo CMS_MODULE_URL?>/images/info.jpg" width=256 />
+                  <?php } else {?>
+                    <img src="<?php echo $texture_url.$profileImage?>&amp;xsize=256&amp;ysize=256" width=256 />
+                  <?php }?>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+
+</html>

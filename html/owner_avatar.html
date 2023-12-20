@@ -1,0 +1,72 @@
+
+<style type="text/css">
+  <?php include(CMS_MODULE_PATH."/html/html.css")?>
+</style>
+
+
+<h2><center><?php echo $grid_name."&nbsp;:&nbsp;".$avatar_own_ttl?></center></h2>
+
+
+<!-- echo Messages -->
+<?php if ($this->hasError) {?>
+  <div align="center" style="margin-bottom:10px;">
+    <ul style="list-style:none;">
+      <?php foreach($this->errorMsg as $mesg) {?>
+        <li><strong style="color: #f02022;"><?php echo $mesg?></strong></li>
+      <?php }?>
+    </ul>
+  </div>
+<?php } else {?>
+  <div align="center" style="margin-bottom:10px;">
+    <?php if ($this->updated_owner) {?>	<!-- !$showPostForm -->
+      <h4 style="color: #1010e0;"><?php echo $avatar_get?></h4>
+    <?php }?>
+  </div>
+<?php }?>
+
+
+<?php if ($showPostForm) {?>
+  <form name="assignform" id="assignform" action="<?php echo $this->action_url?>" method="POST">
+<?php } else {?>
+  <form name="assignform" id="assignform" action="<?php echo $this->return_url?>" method="GET">
+<?php }?>
+
+  <table width="450" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#ffffff;">
+
+    <tr>
+      <td width="100" class="head"><?php echo $firstname_ttl?></td>
+      <td width="320" class="even"><strong><?php echo $this->firstname?></strong></td>
+    </tr>
+
+    <tr>
+      <td class="head"><?php echo $lastname_ttl?></td>
+      <td class="odd"><strong><?php echo $this->lastname?></strong></td>
+    </tr>
+
+    <tr>
+      <?php if ($showPostForm) {?>
+        <td class="head"><?php echo $passwd_ttl?></td>
+        <td class="even"><input type="password" name="passwd" size="32" maxlength="16"  /></td>
+      <?php } else {?>
+        <td class="head"><?php echo $ownername_ttl?></td>
+        <td class="even"><?php echo $this->ownername?></td>	
+      <?php }?>
+    </tr>
+  </table>
+
+  <div align="center" style="margin-top:10px;">
+    <?php if ($showPostForm) {?>
+      <input type="hidden" name="userid"  value="<?php echo $this->user_id?>" />
+      <input type="hidden" name="uuid"    value="<?php echo $this->UUID?>" />
+      <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+      <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
+      <input type="submit" value="<?php echo $avatar_own_ttl?>" />&nbsp;
+      <input type="reset"  value="<?php echo $reset_ttl?>" />
+    <?php } else {?>
+      <input type="hidden" name="course"   value="<?php echo $this->course_id?>" />
+      <input type="submit" value="<?php echo $return_ttl?>" />
+    <?php }?>
+  </div>
+
+</form>
+<br />

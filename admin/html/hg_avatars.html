@@ -1,0 +1,190 @@
+
+<style type="text/css">
+  <?php include(CMS_MODULE_PATH."/html/html.css")?>
+</style>
+
+<table width="85%" border="0" align="center" cellpadding="0" cellspacing="0" >
+  <tr>
+    <td bgcolor="#e8e8e8">
+      <div align="center">
+        <h2><?php echo $grid_name."&nbsp;:&nbsp;".$hg_avatars?></h2>
+      </div>
+      <?php echo $content?>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Page Navi -->
+<table width=85% cellpadding=3 border=0 cellspacing=0 bgcolor=#999999 align="center">
+  <tr style="filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#0000cc', endColorStr='#ffffff', gradientType='1');">
+
+    <td>&nbsp;</td>
+    <td width=200>
+      <strong style="color: #000;">&nbsp;<?php echo number_format($this->number)." ".$users_found ?></strong>
+    </td>
+
+    <!-- icon line -->
+    <td width="50">
+      <?php if ($this->icon[0]=="on") {?>
+        <a href="<?php echo $action_url.$plimit_amp.$pstart_.'0'?>" target="_self">
+      <?php }?>
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_back_more_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
+      <?php if ($this->icon[0]=="on") {?>
+        </a>
+      <?php }?>
+    </td>
+
+    <td width="50">
+      <?php if ($this->icon[0]=="on") {?>
+        <a href="<?php echo $action_url.$plimit_amp.$pstart_.$this->pnum[0]?>" target="_self">
+      <?php }?>
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_back_one_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
+      <?php if ($this->icon[0]=="on") {?>
+        </a>
+      <?php }?>
+    </td>
+
+    <td width="200" align=center>
+      <strong style="color: #000;"><?php echo $page_num." ".$this->sitestart." ".$page_num_of." ".$this->sitemax?>&nbsp;&nbsp;</strong>
+    </td>
+
+    <td width="50">
+      <?php if ($this->icon[1]=="on") {?>
+        <a href="<?php echo $action_url.$plimit_amp.$pstart_.$this->pnum[1]?>" target="_self">
+      <?php }?>
+          <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_forward_one_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
+      <?php if ($this->icon[1]=="on") {?>
+        </a>
+      <?php }?>
+    </td>
+
+    <td width="50">
+      <?php if ($this->icon[1]=="on") {?>
+        <a href="<?php echo $action_url.$plimit_amp.$pstart_.$this->pnum[2]?>" target="_self">
+      <?php }?>
+          <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_forward_more_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
+      <?php if ($this->icon[1]=="on") {?>
+        </a>
+      <?php }?>
+    </td>
+
+    <td width="10"></td>
+    <td width="10"></td>
+
+    <td width="30">
+      <a href="<?php echo $action_url.$pstart_.'0'.$plimit_.'10'?>" target="_self">
+      <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[3].'.gif'?>" width=15 height=15 border="0" ALT="Limit 10"></a>
+    </td>
+    <td width="30">
+      <a href="<?php echo $action_url.$pstart_.'0'.$plimit_.'25'?>" target="_self">
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[4].'.gif'?>" width=15 height=15 border="0" ALT="Limit 25">
+      </a>
+    </td>
+    <td width="30">
+      <a href="<?php echo $action_url.$pstart_.'0'.$plimit_.'50'?>" target="_self">
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[5].'.gif'?>" width=15 height=15 border="0" ALT="Limit 50">
+      </a>
+    </td>
+    <td width="30">
+      <a href="<?php echo $action_url.$pstart_.'0'.$plimit_.'100'?>" target="_self">
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[6].'.gif'?>" width=15 height=15 border="0" ALT="Limit 100">
+      </a>
+    </td>
+
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+
+  </tr>
+</table>
+
+
+<table width="85%" height="70%" border=0 align=center cellpadding="0" cellspacing="0">
+  <tbody>
+    <!-- Title Line -->
+    <tr bgcolor=#c0c0c0>
+      <td width=15 height=26>&nbsp;</td>
+      <td width=40><strong style="color: #222;">&nbsp;<?php echo $number_ttl?></strong></td>
+
+      <td width=200><strong><?php echo $avatarname_ttl?></strong></td>
+
+      <td width=150>
+        <?php if (USE_UTC_TIME) {?>
+          <strong><?php echo $lastlogin_ttl?>&nbsp;(UTC)</strong>
+        <?php }else{?>
+          <strong><?php echo $lastlogin_ttl?>&nbsp;(Local)</strong>
+        <?php }?>
+      </td>
+
+      <td width= 80><strong style="color: #222;"><?php echo $status_ttl?></strong></td>
+      <td width=180><strong style="color: #222;"><?php echo $crntregion_ttl?></strong></td>
+      <td width=220><strong style="color: #222;"><?php echo $hg_ttl?></strong></td>
+
+      <td>&nbsp;</td>
+
+      <?php if ($use_currency) {?>
+        <td width=150>
+          <strong style="color: #222;"><?php echo $CFG->modlos_currency_unit?></strong>
+        </td>
+      <?php }?>
+      <td>&nbsp;</td>
+    </tr>
+
+    <!-- Data -->
+    <?php foreach($this->db_data as $dat) {?>
+      <?php if ($dat['num']%2==0) { ?>                
+      <tr style='background-color: #ffffff;'>
+      <?php } else {?>
+      <tr style='background-color: #f0f0f0;'>
+      <?php }?>
+
+        <td height=26>&nbsp;</strong></td>
+        <td><strong style="color: #000;">&nbsp;<?php echo $dat['num']+1+$this->pstart?></strong></td>
+
+        <td>
+          <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_params.'&agent='.$dat['UUID']?>','','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+            <strong style="color: #005;">
+              <?php echo htmlspecialchars($dat['firstname'])?>&nbsp;&nbsp;<?php echo htmlspecialchars($dat['lastname'])?>
+            </strong>
+          </a>
+        </td>
+
+        <td><strong style="color: #444444;"><?php echo $dat['lastin']?></strong></td>
+        <td>
+            <?php if ($dat['online']) {?>
+              <strong style="color: #005500;"><?php echo $online_ttl?></strong>
+            <?php } else {?>
+              <strong style="color: #0000cc;"><?php echo $offline_ttl?></strong>
+            <?php }?>
+        </td>
+
+        <td>
+          <?php if ($dat['online']) {?>
+            <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/sim.php'.$url_params.'&region='.$dat['region_id']?>','','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+              <strong style="color: #005500;"><?php echo $dat['region']?></strong>
+            </a>
+          <?php } else {?>
+            <strong style="color: #0055cc;"><?php echo $dat['region']?></strong>
+          <?php }?>
+        </td>
+
+        <td>
+          <a href="http://<?php echo $dat['hgName']?>/" target="_blank">
+            <strong style="color: #a02020"><?php echo $dat['hgName']?></strong>
+          </a>
+        </td>
+
+        <td>&nbsp;</td>
+
+        <?php if ($use_currency) {?>
+          <td>
+            <a href="<?php echo $this->currency_url. '&amp;agent='.$dat['UUID']?>" target="_blank"><strong><?php echo $show_ttl?></strong></a>
+          </td>
+        <?php }?>
+        <td>&nbsp;</td>
+
+      </tr>
+    <?php }?>
+  </tbody>
+</table>
+<br />

@@ -1,0 +1,246 @@
+
+<style type="text/css">
+  <?php include(CMS_MODULE_PATH."/html/html.css")?>
+</style>
+
+<table width="85%" border="0" align="center" cellpadding="0" cellspacing="0" >
+  <tr>
+    <td bgcolor="#18e088">
+      <div align="center">
+        <h2><?php echo $grid_name."&nbsp;:&nbsp;".$currency_log?></h2>
+      </div>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Page Navi -->
+<table width="85%" cellpadding="3" border="0" cellspacing="0" style="background-color:#999999;" align="center">
+  <tr style="filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#0000cc', endColorStr='#ffffff', gradientType='1');">
+
+    <td>&nbsp;</td>
+    <td width=200>
+      <strong style="color: #000;">&nbsp;<?php echo number_format($this->number)." ".$currency_found ?></strong>
+    </td>
+
+    <!-- icon line -->
+    <td width="50">
+      <?php if ($this->icon[0]=="on") {?>
+        <a href="<?php echo $action_url.$plimit_amp.$pstart_.'0'.$order_amp.$nosystem_amp?>" target="_self">
+      <?php }?>
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_back_more_'.$this->icon[0].'.gif'?>" width="15" height="15" border="0">
+      <?php if ($this->icon[0]=="on") {?>
+        </a>
+      <?php }?>
+    </td>
+
+    <td width="50">
+      <?php if ($this->icon[0]=="on") {?>
+        <a href="<?php echo $action_url.$plimit_amp.$pstart_.$this->pnum[0].$order_amp.$nosystem_amp?>" target="_self">
+      <?php }?>
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_back_one_'.$this->icon[0].'.gif'?>" width="15" height="15" border="0">
+      <?php if ($this->icon[0]=="on") {?>
+        </a>
+      <?php }?>
+    </td>
+
+    <td width="200" align="center">
+      <strong style="color: #000;"><?php echo $page_num." ".$this->sitestart." ".$page_num_of." ".$this->sitemax?>&nbsp;&nbsp;</strong>
+    </td>
+
+    <td width="50">
+      <?php if ($this->icon[1]=="on") {?>
+        <a href="<?php echo $action_url.$plimit_amp.$pstart_.$this->pnum[1].$order_amp.$nosystem_amp?>" target="_self">
+      <?php }?>
+          <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_forward_one_'.$this->icon[1].'.gif'?>" width="15" height="15" border="0">
+      <?php if ($this->icon[1]=="on") {?>
+        </a>
+      <?php }?>
+    </td>
+
+    <td width="50">
+      <?php if ($this->icon[1]=="on") {?>
+        <a href="<?php echo $action_url.$plimit_amp.$pstart_.$this->pnum[2].$order_amp.$nosystem_amp?>" target="_self">
+      <?php }?>
+          <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_forward_more_'.$this->icon[1].'.gif'?>" width="15" height="15" border="0">
+      <?php if ($this->icon[1]=="on") {?>
+        </a>
+      <?php }?>
+    </td>
+
+    <td width="10"></td>
+    <td width="10"></td>
+
+    <td width="30">
+      <a href="<?php echo $action_url.$pstart_.'0'.$plimit_.'10'.$order_amp.$nosystem_amp?>" target="_self">
+      <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[3].'.gif'?>" width="15" height="15" border="0" ALT="Limit 10"></a>
+    </td>
+    <td width="30">
+      <a href="<?php echo $action_url.$pstart_.'0'.$plimit_.'25'.$order_amp.$nosystem_amp?>" target="_self">
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[4].'.gif'?>" width="15" height="15" border="0" ALT="Limit 25">
+      </a>
+    </td>
+    <td width="30">
+      <a href="<?php echo $action_url.$pstart_.'0'.$plimit_.'50'.$order_amp.$nosystem_amp?>" target="_self">
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[5].'.gif'?>" width="15" height="15" border="0" ALT="Limit 50">
+      </a>
+    </td>
+    <td width="30">
+      <a href="<?php echo $action_url.$pstart_.'0'.$plimit_.'100'.$order_amp.$nosystem_amp?>" target="_self">
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[6].'.gif'?>" width="15" height="15" border="0" ALT="Limit 100">
+      </a>
+    </td>
+
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+
+  </tr>
+</table>
+
+
+<!-- Function Line -->
+<table width="85%" cellpadding="3" border="0" cellspacing="1" style="background-color:#e0e0e0;" align="center">
+  <tr bgcolor="#f0f0a0">
+    <td style="height:28px; width:50px; table-layout:fixed;">&nbsp;</td>
+
+    <td style="width:450px; table-layout:fixed; color:#000;">
+      <form action="<?php echo $this->action_url.$plimit_amp.$order_amp?>" method="POST">
+        <strong>
+          <input type="checkbox" name="nosystem" value="1" <?php echo $nosystem_checked?> />
+          <?php echo $currency_nosystem?>&nbsp;&nbsp;&nbsp;
+        </strong>
+        <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
+        <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+        <input type="Submit" value="Reload" style="height:26px;" />
+      </form>
+    </td>
+
+    <td width=400 style="color: #000;" align="right">
+      <?php if ($has_permit) {?>
+      <form action="<?php echo $this->action_url.$plimit_amp.$order_amp?>" method="POST">
+        <strong>
+          <?php echo $currency_send?>&nbsp;
+          <input name="send_money" id="send_money" size="11" maxlength="10" value="0" style="height:16px;" />
+          <select wide="12" name="send_type" id="send_type" style="height:26px; margin-bottom:0px; color:#000"/>
+               <option value="5003" selected>ReferBonus</option>
+               <option value="5012" >SendMoney</option>
+               <option value="5005" >Refund</option>
+          </select>
+        </strong>
+        <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
+        <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+        <input type="Submit" value="Send"   style="height:26px;" />
+      </form>
+      <?php }?>
+    </td>
+
+    <td width=50>&nbsp;</td>
+    <td width=200 style="color: #c22;"><strong><?php echo $currency_balance.': '.$balance ?></strong></td>
+
+    <td style="width:50px; table-layout:fixed;">&nbsp;</td>
+  </tr>
+</table>
+
+
+<table cellpadding="0" cellspacing="0" border="0" width="85%" height="70%" style="background-color:#ffffff;" align="center">
+  <tr>
+    <td valign="top">
+
+      <table cellpadding="0" cellspacing="0" border="0" width="100%">
+
+        <!-- Title Line -->
+        <tr bgcolor=#c0c0c0>
+          <td width="15" height="26">&nbsp;</td>
+          <td width="40" align="left"><strong style="color: #222;">&nbsp;<?php echo $number_ttl?></strong></td>
+
+          <td width="180">
+            <a href="<?php echo $action_url.$plimit_amp.$pstart_amp.$desc_amp?>&amp;order=time" target="_self">
+              <?php if (USE_UTC_TIME) {?>
+                <strong style="color:#115500;"><?php echo $currency_date?>&nbsp;(UTC)</strong>
+              <?php }else{?>
+                <strong style="color:#115500;"><?php echo $currency_date?>&nbsp;(Local)</strong>
+              <?php }?>
+            </a>
+          </td>
+
+          <td width="20">&nbsp;</td>
+          <td width="100" align="right"><strong style="color: #222;"><?php echo $currency_pay?></strong></td>
+          <td width="20">&nbsp;</td>
+          <td width="100" align="right"><strong style="color: #222;"><?php echo $currency_income?></strong></td>
+
+          <td width="100" align="right"><strong style="color: #222;"><?php echo $currency_balance?></strong></td>
+          <td width="50">&nbsp;</td>
+          <td width="200"><strong style="color: #222;"><?php echo $currency_object?></strong></td>
+          <td width="30">&nbsp;</td>
+          <td width="200"><strong style="color: #222;"><?php echo $region_ttl?></strong></td>
+          <td width="30">&nbsp;</td>
+          <td width="200"><strong style="color: #222;"><?php echo $currency_opponent?></strong></td>
+
+          <td width="202">&nbsp;</td>
+        </tr>
+
+        <!-- Data -->
+        <?php foreach($this->db_data as $dat) {?>
+          <?php if ($dat['status']=='9') { ?>                
+            <tr style='background-color: #f04040;'>
+          <?php } else if ($dat['num']%2==0) { ?>                
+            <tr style='background-color: #ffffff;'>
+          <?php } else {?>
+            <tr style='background-color: #f0f0f0;'>
+          <?php }?>
+            <td height=26>&nbsp;</strong></td>
+            <td><strong style="color: #000000;">&nbsp;<?php echo $dat['num']+1+$this->pstart?></strong></td>
+            <td align="left"><strong style="color: #444444;"><?php echo $dat['date']?></strong></td>
+            <td>&nbsp;</td>
+
+            <td align="right">
+              <?php if ($dat['Iama']=='Sender') {?>
+                <strong style="color: #2020a0;"><?php echo $dat['pay']?></strong>
+              <?php } else {?>
+                <strong style="color: #802050;"><?php echo $dat['pay']?></strong>
+              <?php }?>
+            </td>
+            <td>&nbsp;</td>
+            <td align="right">
+              <?php if ($dat['Iama']=='Sender') {?>
+                <strong style="color: #802050;"><?php echo $dat['income']?></strong>
+              <?php } else {?>
+                <strong style="color: #2020a0;"><?php echo $dat['income']?></strong>
+              <?php }?>
+            </td>
+            <td align="right"><strong style="color: #2020a0;"><?php echo $dat['balance']?></strong></td>
+
+            <td>&nbsp;</td>
+            <td><strong style="color: #206020;"><?php echo $dat['objectName']?></strong></td>
+            <td>&nbsp;</td>
+
+            <td>
+              <?php if ($dat['regionName']!='00000000-0000-0000-0000-000000000000' and $dat['regionName']!=' - ' and $dat['regionUUID']!='') { ?>
+                <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/sim.php'.$url_params.'&region='.$dat['regionUUID']?>','','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+                  <strong><?php echo $dat['regionName']?></strong>
+                </a>
+              <?php } else {?>
+                <strong><?php echo $dat['regionName']?></strong>
+              <?php }?>
+            </td>
+
+            <td>&nbsp;</td>
+
+            <td>
+              <?php if ($dat['oppuuid']!='00000000-0000-0000-0000-000000000000' and $dat['opponent']!=' - ') { ?>
+                <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_params.'&agent='.$dat['oppuuid']?>','','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+                  <strong style="color: #000055;"><?php echo $dat['opponent']?></strong>
+                </a>
+              <?php } else {?>
+                <strong style="color: #000055;"><?php echo $dat['opponent']?></strong>
+              <?php }?>
+            </td>
+
+            <td>&nbsp;</td>
+          </tr>
+        <?php }?>
+      </table>
+    </td>
+  </tr>
+</table>
+<br />

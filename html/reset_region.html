@@ -1,0 +1,88 @@
+
+<style type="text/css">
+  <?php include(CMS_MODULE_PATH."/html/html.css")?>
+</style>
+
+
+<h2><center><?php echo $grid_name."&nbsp;:&nbsp;".$region_reset_ttl?></center></h2>
+
+
+<!-- echo Message -->
+<?php if ($this->hasError) {?>
+  <div align="center" style="margin-bottom:10px;">
+    <ul style="list-style:none;">
+      <?php foreach ($this->errorMsg as $mesg) {?>
+        <li><strong style="color: #f01010;"><?php echo $mesg?></strong></li>
+      <?php }?>
+    </ul>
+  </div>
+<?php } else {?>
+  <?php if ($this->reseted) {?>
+    <div align="center" style="margin-bottom:10px;">
+      <ul style="list-style:none;">
+        <li><strong style="color: #1010e0;"><?php echo $region_reseted?></li>
+        <li><strong style="color: #1010e0;"><?php echo $region_reseted_exp?></li>
+      </ul>
+    </div>
+  <?php }?>
+<?php }?>
+
+
+<form name="assignform" id="assignform" action="<?php echo $this->reset_url?>" method="POST">
+
+  <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+  <input type="hidden" name="region"  value="<?php echo $this->UUID?>" />
+  <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
+
+  <table width="500" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#ffffff;">
+    <tr>
+      <td width="120" class="head"><?php echo $region_name_ttl?></td>
+      <td width="260" class="even"><strong><?php echo $this->regionName?></strong></td>
+    </tr>
+
+    <tr>
+      <td class="head"><?php echo $server_ttl?></td>
+      <td class="odd" ><strong><?php echo $this->serverName?></strong></td>
+    </tr>
+
+    <tr>
+      <td class="head"><?php echo $coordinates_ttl?></td>
+      <td class="even"><strong><?php echo"X:&nbsp;".$this->locX.",&nbsp;&nbsp;Y:&nbsp;".$this->locY?></strong></td>
+    </tr>
+
+    <tr>
+      <td class="head"><?php echo $region_size_ttl?></td>
+      <td class="odd"><strong><?php echo"X:&nbsp;".$this->sizeX.",&nbsp;&nbsp;Y:&nbsp;".$this->sizeY?></strong></td>
+    </tr>
+
+    <tr>
+      <td class="head"><?php echo $admin_user_ttl?></td>
+      <td class="even"><strong><?php echo htmlspecialchars($this->ownerName)?></strong></td>
+    </tr>
+
+    <tr>
+      <td class="head">&nbsp;</td>
+      <td class="odd" >&nbsp;<img src="<?php echo $regionimage_url?>" width="256" height="256" style="margin-bottom:5px;"/></td>
+    </tr>
+  </table>
+
+  <div align="center" style="margin-top:10px;">
+    <?php if (!$this->reseted) {?>
+      <input name="reset_region" type="submit" id="reset_region" value="<?php echo $reset_region_ttl?>" />
+      <?php echo $OUTPUT->help_icon('modlos_region_reset', 'block_modlos') ?>
+      &nbsp;&nbsp;&nbsp;
+    <?php }?>
+    <?php if ($this->action=='close') {?>
+      <a href="#" onclick="window.close()"><strong><?php echo $close_ttl?></strong></a>
+    <?php } else {?>
+      <?php if (!$this->reseted) {?>
+        <input name="cancel" type="submit" id="cancel" value="<?php echo $cancel_ttl?>" />
+      <?php } else {?>
+        <!-- <a href="<?php echo $this->return_url?>"><strong><?php echo $return_ttl?></strong></a> -->
+        <input name="cancel" type="submit" id="cancel" value="<?php echo $return_ttl?>" />
+      <?php }?>
+    <?php }?>
+  </div>
+
+</form>
+<br />

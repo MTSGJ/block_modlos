@@ -1,0 +1,214 @@
+<script>
+function checklength(obj,warning_div){
+    var mlength=obj.getAttribute? parseInt(obj.getAttribute("maxlength")) : ""
+    if (obj.getAttribute && obj.value.length>mlength){
+        obj.blur();
+        obj.value=obj.value.substring(0,mlength);
+        document.getElementById(warning_div).innerHTML = "<span style='color:red;font-weight:bold;'>max. "+mlength+"</span>";
+    }
+    else {
+        warning_div.innerHTML = "";
+    }
+    document.getElementById('counter').innerHTML =  obj.value.length;
+}
+</script>
+
+
+<style type="text/css">
+  <?php include(CMS_MODULE_PATH."/html/html.css")?>
+</style>
+
+
+<h2><center><?php echo $grid_name?>&nbsp;:&nbsp;<?php echo $events_make_ttl?></center></h2>
+
+
+<?php if ($this->hasError) {?>
+  <div align="center" style="margin-bottom:10px;">
+    <ul style="list-style:none;">
+      <?php foreach ($this->errorMsg as $errval) {?>
+        <li><strong style="color: #f01010;"><?php echo $errval?></strong></li>
+      <?php }?>
+    </ul>
+  </div>
+<?php }?>
+
+
+<?php if ($this->event_saved) {?>
+  <div align="center" style="margin-bottom:10px;">
+    <h4 style="color: #1010e0;"><?php echo $events_saved?></h4>
+  </div>
+
+  <table cellSpacing="2" cellPadding="2" width="600" border="0" align="center">
+    <tbody>
+      <tr>
+        <td valign=top align=center>&nbsp;</td>
+        <td valign=top align=center width=600>
+
+          <table width="600" border="0" align="center" cellpadding="2" cellspacing="1" style="color:#1010e0; font-weight:bold;">
+            <tr align="left">
+              <td class="head" width=200><?php echo $events_name?></td>
+              <td class="even" width=400><?php echo $this->saved_event_name?></td>
+            </tr>
+            <tr align="left">
+              <?php if (USE_UTC_TIME) {?>
+                <td class="head"><?php echo $events_date?>&nbsp;(UTC)</td>
+              <?php } else {?>
+                <td class="head"><?php echo $events_date?>&nbsp;(Local)</td>
+              <?php }?>
+              <td class="odd"><?php echo $this->saved_event_date?></td>
+            </tr>
+            <tr align="left">
+              <td class="head"><?php echo $events_category?></td>
+              <td class="even">
+                <?php echo $Categories[$this->saved_category]?>
+              </td>
+            </tr>
+<!--
+            <tr align="left">
+              <td class="head"><?php echo $events_owner?></td>
+              <td class="odd" ><?php echo $this->saved_event_owner?></td>
+            </tr>
+-->
+            <tr align="left">
+              <td class="head"><?php echo $events_creator?></td>
+              <td class="odd" ><?php echo $this->saved_event_creator?></td>
+            </tr>
+            <tr align=left>
+              <td class="head"><?php echo $events_location?></td>
+              <td class="even"><?php echo $this->saved_region_name?>&nbsp;:&nbsp; <?php echo $this->saved_global_pos?></td>
+            </tr>
+            <tr align=left>
+              <td class="head"><?php echo $events_amount?>&nbsp;(L$)</td>
+              <td class="odd" ><?php echo $this->saved_cover_amount?></td>
+            </tr>
+            <?php if (!OPENSIM_PG_ONLY) {?>
+              <tr align="left">
+                <td class="head"><?php echo $events_type?></td>
+               <td class="even"><strong><img height=20px width=20px <?php echo $this->saved_event_type?> /></strong></td>
+              </tr>
+            <?php }?>
+          </table>
+
+        </td>
+        <td valign=top align=center>&nbsp;</td>
+      </tr>
+
+      <tr><td colspan="3"><hr /></td></tr>
+    </tbody>
+  </table>
+<?php }?>
+
+
+<form METHOD="POST" ACTION=<?php echo $this->action_url?> >
+  <input type="hidden" name="uid"      value="<?php echo $this->uid?>" />
+  <input type="hidden" name="event_id" value="<?php echo $this->event_id?>" />
+
+  <table cellSpacing="0" cellPadding="0" width="600" border="0" align="center">
+    <tbody>
+      <tr align="left">
+        <td class="head" width=200><?php echo $events_name?></td>
+        <td class="odd"  width=400><input type="text" id="event_name" name="event_name" size="35" value="<?php echo $this->event_name?>" /></td>
+      </tr>
+
+      <tr align="left">
+        <td class="head" valign="top"><?php echo $events_desc?></td>
+        <td class="even">
+          <textarea name="event_desc" rows="7" cols="" style="width:90%;" wrap="virtual" maxlength="1024" onfocus="return checklength(this,'contact_max_warning')" onkeyup="return checklength(this,'contact_max_warning')" ><?php echo $this->event_desc?></textarea>
+          <div>
+            <em id="contact_max_warning"><?php echo $events_max?> <strong>1024</strong> </em> 
+            <?php echo $events_chars?>&nbsp;&nbsp;<?php echo $events_inputed?>: <em id="counter"></em>
+          </div>
+        </td>
+      </tr>
+
+      <tr align="left">
+        <td class="head" valign="top"><?php echo $events_creator?></td>
+        <td class="odd">
+          <select name="creator_name">
+            <?php foreach ($this->creators as $creator) {?>
+              <?php if ($creator['fullname']==$this->event_creator) {?>
+                <option value="<?php echo $creator['UUID']?>|<?php echo $creator['fullname']?>" selected ><?php echo $creator['fullname']?></option>
+              <?php } else {?>
+                <option value="<?php echo $creator['UUID']?>|<?php echo $creator['fullname']?>" ><?php echo $creator['fullname']?></option>
+              <?php }?>
+ 		  <?php }?>
+          </select>
+        </td>
+      </tr>
+
+      <?php include($date_file)?>
+
+      <tr align="left">
+        <td class="head"><?php echo $events_category?></td>
+        <td class="odd">
+          <select name="category">
+            <option value="0"  <?php if ($this->category==0) {?>selected<?php }?> ><?php echo $Categories[0]?></option>
+            <option value="18" <?php if ($this->category==18){?>selected<?php }?> ><?php echo $Categories[18]?></option>
+            <option value="19" <?php if ($this->category==19){?>selected<?php }?> ><?php echo $Categories[19]?></option>
+            <option value="20" <?php if ($this->category==20){?>selected<?php }?> ><?php echo $Categories[20]?></option>
+            <option value="22" <?php if ($this->category==22){?>selected<?php }?> ><?php echo $Categories[22]?></option>
+            <option value="23" <?php if ($this->category==23){?>selected<?php }?> ><?php echo $Categories[23]?></option>
+            <option value="24" <?php if ($this->category==24){?>selected<?php }?> ><?php echo $Categories[24]?></option>
+            <option value="25" <?php if ($this->category==25){?>selected<?php }?> ><?php echo $Categories[25]?></option>
+            <option value="26" <?php if ($this->category==26){?>selected<?php }?> ><?php echo $Categories[26]?></option>
+            <option value="27" <?php if ($this->category==27){?>selected<?php }?> ><?php echo $Categories[27]?></option>
+            <option value="28" <?php if ($this->category==28){?>selected<?php }?> ><?php echo $Categories[28]?></option>
+            <option value="29" <?php if ($this->category==29){?>selected<?php }?> ><?php echo $Categories[29]?></option>
+          </select>
+        </td>
+      </tr>
+
+      <tr align="left">
+        <td nowrap class="head"><?php echo $events_charge?></td>
+        <td class="even">
+          <select name="cover_charge">
+            <option value="0" <?php if ($this->cover_charge==0){?>selected<?php }?> ><?php echo $modlos_no?></option>
+            <option value="1" <?php if ($this->cover_charge==1){?>selected<?php }?> ><?php echo $modlos_yes?></option>
+          </select>&nbsp;&nbsp;
+          <?php echo $events_amount?>:&nbsp;<input type="text" name="cover_amount" size="3" maxlength="5" value="<?php echo $this->cover_amount?>" />
+        </td>
+      </tr>
+
+      <tr align="left">
+        <td class="head"><?php echo $events_location?></td>
+        <td class="odd">
+          <select name="parcel_name">
+            <option value="0/0/0|00000000-0000-0000-0000-00000000000"><?php echo $events_pick_parcel?></option>
+            <?php foreach ($this->parcels as $parcel) {?>
+              <?php if ($this->global_pos==$parcel['landingpoint'] and $this->region_uuid==$parcel['regionUUID']) {?>
+                <option value="<?php echo $parcel['landingpoint']?>|<?php echo $parcel['regionUUID']?>" selected><?php echo $parcel['name']?></option>
+              <?php } else {?>
+                <option value="<?php echo $parcel['landingpoint']?>|<?php echo $parcel['regionUUID']?>" ><?php echo $parcel['name']?></option>
+              <?php }?>
+            <?php }?>
+          </select>
+        </td>
+      </tr>
+
+      <?php if (OPENSIM_PG_ONLY) {?>
+        <input type="hidden" name="check_mature" value="0" />
+      <?php } else {?>
+        <tr align="left">
+          <td class="head"><?php echo $events_type_ttl?></td>
+          <td class="even">
+            <input type="checkbox" name="check_mature" value="1" <?php if ($this->check_mature==1) {?>checked<?php }?> />
+            <?php echo $events_mature_ttl?>
+          </td>
+        </tr>
+      <?php }?>
+    </tbody>
+  </table>
+
+  <div align="center" style="margin-top:10px;">
+    <input type="submit" name="action_submit" value="<?php echo $events_save?>" />&nbsp;&nbsp;
+    <input type="reset"  value="<?php echo $modlos_reset_ttl?>" />
+    <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
+    <?php if ($this->event_id>0) {?>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="submit" name="submit_delete" value="<?php echo $modlos_delete_ttl?>" />
+    <?php }?>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="submit" name="cancel" value="<?php echo $modlos_cancel_ttl?>" />
+  </div>
+</form>
+<br />

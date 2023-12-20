@@ -1,0 +1,92 @@
+
+            <tr align="left">
+              <?php if (USE_UTC_TIME) {?>
+                <td class="head"><?php echo $events_date?>&nbsp;(UTC)</td>
+              <?php } else {?>
+                <td class="head"><?php echo $events_date?>&nbsp;(Local)</td>
+              <?php }?>
+
+              <td class="odd">
+                <select name="event_year">
+                  <?php
+                    $now_year = date('Y');
+                    for ($t=$now_year; $t<$now_year + 3; $t++) { ?>
+                      <option value=<?php echo "$t "; if ($t==$now_year) {?>selected<?php } echo ">$t 年"?></option>
+                  <?php  } ?>
+                </select>&nbsp;&nbsp;
+
+                <select name="event_month">
+                  <?php for ($m=1; $m<13; $m++) {?> 
+                    <?php if ($m==$this->event_month) {?>
+                      <option value="<?php echo $m?>" selected><?php echo $m?>月</option>
+                    <?php } else {?>
+                      <option value="<?php echo $m?>" ><?php echo $m?>月</option>
+                    <?php }?>
+                  <?php }?>
+                </select>&nbsp;&nbsp;
+
+                <select name="event_day">
+                  <?php for ($d=1; $d<32; $d++) {?> 
+                    <?php if ($d==$this->event_day) {?>
+                      <option value="<?php echo $d?>" selected><?php echo $d?>日</option>
+                    <?php } else {?>
+                      <option value="<?php echo $d?>" ><?php echo $d?>日</option>
+                    <?php }?>
+                  <?php }?>
+                </select>
+
+              </td>
+            </tr>
+
+            <tr align="left">
+              <?php if (USE_UTC_TIME) {?>
+                <td class="head"><?php echo $events_starts?>&nbsp;(UTC)</td>
+              <?php } else {?>
+                <td class="head"><?php echo $events_starts?>&nbsp;(Local)</td>
+              <?php }?>
+
+              <td class="even">
+                <select name="event_hour">
+                  <?php for ($h=0; $h<13; $h++) {?> 
+                    <?php if ($h==$this->event_hour) {?>
+                      <option value="<?php echo $h?>" selected >午前 <?php echo $h?>時</option>
+                    <?php } else {?>
+                      <option value="<?php echo $h?>" >午前 <?php echo $h?>時</option>
+                    <?php }?>
+                  <?php }?>
+                  <?php for ($h=12; $h<24; $h++) {?> 
+                    <?php if ($h==$this->event_hour) {?>
+                      <option value="<?php echo $h?>" selected >午後 <?php echo $h-12?>時</option>
+                    <?php } else {?>
+                      <option value="<?php echo $h?>" >午後 <?php echo $h-12?>時</option>
+                    <?php }?>
+                  <?php }?>
+                </select>&nbsp;&nbsp;
+
+                <select name="event_minute" >
+                  <option value="0"  <?php if ($this->event_minute==0) {?>selected<?php }?> >00分</option>
+                  <option value="15" <?php if ($this->event_minute==15){?>selected<?php }?> >15分</option>
+                  <option value="30" <?php if ($this->event_minute==30){?>selected<?php }?> >30分</option>
+                  <option value="45" <?php if ($this->event_minute==45){?>selected<?php }?> >45分</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr align="left">
+              <td class="head"><?php echo $events_duration?></td>
+              <td class="odd">
+                <select name="duration">
+                  <option value="10"  <?php if ($this->duration==10) {?>selected<?php }?> >10分間</option>
+                  <option value="15"  <?php if ($this->duration==15) {?>selected<?php }?> >15分間</option>
+                  <option value="20"  <?php if ($this->duration==20) {?>selected<?php }?> >20分間</option>
+                  <option value="25"  <?php if ($this->duration==25) {?>selected<?php }?> >25分間</option>
+                  <option value="30"  <?php if ($this->duration==30) {?>selected<?php }?> >30分間</option>
+                  <option value="45"  <?php if ($this->duration==45) {?>selected<?php }?> >45分間</option>
+                  <option value="60"  <?php if ($this->duration==60) {?>selected<?php }?> >1時間</option>
+                  <option value="90"  <?php if ($this->duration==90) {?>selected<?php }?> >1時間半</option>
+                  <option value="120" <?php if ($this->duration==120){?>selected<?php }?> >2時間</option>
+                  <option value="150" <?php if ($this->duration==150){?>selected<?php }?> >2時間半</option>
+                  <option value="180" <?php if ($this->duration==180){?>selected<?php }?> >3時間</option>
+                </select>
+              </td>
+            </tr>

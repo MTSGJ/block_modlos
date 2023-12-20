@@ -1,0 +1,90 @@
+
+            <tr align="left">
+              <?php if (USE_UTC_TIME) {?>
+                <td class="head"><?php echo $events_date?>&nbsp;(UTC)</td>
+              <?php } else {?>
+                <td class="head"><?php echo $events_date?>&nbsp;(Local)</td>
+              <?php }?>
+              <td class="odd">
+
+                <?php
+                  for ($d=1; $d<32; $d++) {
+                    if ($d==$this->event_day) {
+                      echo $d;
+                    }
+                  }
+                ?>
+                &nbsp;&nbsp;
+
+                <?php
+                  if      ($this->event_month==1) echo "January";
+                  else if ($this->event_month==2) echo "February";
+                  else if ($this->event_month==3) echo "March";
+                  else if ($this->event_month==4) echo "April";
+                  else if ($this->event_month==5) echo "May";
+                  else if ($this->event_month==6) echo "June";
+                  else if ($this->event_month==7) echo "July";
+                  else if ($this->event_month==8) echo "August";
+                  else if ($this->event_month==9) echo "September";
+                  else if ($this->event_month==10)echo "October";
+                  else if ($this->event_month==11)echo "November";
+                  else if ($this->event_month==12)echo "December";
+                ?>
+                &nbsp;&nbsp;
+
+                <?php
+                  $now_year = date('Y');
+                  for ($t=$now_year; $t<$now_year + 3; $t++) { 
+                    if ($t==$now_year) echo $t;
+                  }
+                ?>
+              </td>
+            </tr>
+
+            <tr align="left">
+              <?php if (USE_UTC_TIME) {?>
+                <td class="head"><?php echo $events_starts?>&nbsp;(UTC)</td>
+              <?php } else {?>
+                <td class="head"><?php echo $events_starts?>&nbsp;(Local)</td>
+              <?php }?>
+              <td class="even">
+
+                <?php
+                  $h = $this->event_hour;
+                  if ($h<13) {
+                    echo "$h am";
+                  }
+                  else {
+                    $h = $h - 12;
+                    echo "$h pm";
+                  }
+                ?>
+
+                <?php
+                  if      ($this->event_minute==0) echo ":00";
+                  else if ($this->event_minute==15)echo ":15";
+                  else if ($this->event_minute==30)echo ":30";
+                  else if ($this->event_minute==45)echo ":45";
+               ?>
+              </td>
+            </tr>
+
+            <tr align="left">
+              <td class="head"><?php echo $events_duration?></td>
+              <td class="odd">
+                <?php
+                  if      ($this->duration==10) echo "10 minutes";
+                  else if ($this->duration==15) echo "15 minutes";
+                  else if ($this->duration==20) echo "20 minutes";
+                  else if ($this->duration==25) echo "25 minutes";
+                  else if ($this->duration==30) echo "30 minutes";
+                  else if ($this->duration==45) echo "45 minutes";
+                  else if ($this->duration==60) echo "1 hour";
+                  else if ($this->duration==90) echo "1.5 hours";
+                  else if ($this->duration==120)echo "2 hours";
+                  else if ($this->duration==150)echo "2.5 hours";
+                  else if ($this->duration==180)echo "3 hours";
+                ?>
+              </td>
+            </tr>
+

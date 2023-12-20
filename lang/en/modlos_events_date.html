@@ -1,0 +1,97 @@
+
+            <tr align="left">
+              <?php if (USE_UTC_TIME) {?>
+                <td class="head"><?php echo $events_date?>&nbsp;(UTC)</td>
+              <?php } else {?>
+                <td class="head"><?php echo $events_date?>&nbsp;(Local)</td>
+              <?php }?>
+              <td class="odd">
+
+                <select name="event_day">
+                  <?php for ($d=1; $d<32; $d++) {?> 
+                    <?php if ($d==$this->event_day) {?>
+                      <option value="<?php echo $d?>" selected ><?php echo $d?></option>
+                    <?php } else {?>
+                      <option value="<?php echo $d?>" ><?php echo $d?></option>
+                    <?php }?>
+                  <?php }?>
+                </select>&nbsp;&nbsp;
+
+                <select name="event_month">
+                  <option value="1"  <?php if ($this->event_month==1) {?> selected<?php }?> >January</option>
+                  <option value="2"  <?php if ($this->event_month==2) {?> selected<?php }?> >February</option>
+                  <option value="3"  <?php if ($this->event_month==3) {?> selected<?php }?> >March</option>
+                  <option value="4"  <?php if ($this->event_month==4) {?> selected<?php }?> >April</option>
+                  <option value="5"  <?php if ($this->event_month==5) {?> selected<?php }?> >May</option>
+                  <option value="6"  <?php if ($this->event_month==6) {?> selected<?php }?> >June</option>
+                  <option value="7"  <?php if ($this->event_month==7) {?> selected<?php }?> >July</option>
+                  <option value="8"  <?php if ($this->event_month==8) {?> selected<?php }?> >August</option>
+                  <option value="9"  <?php if ($this->event_month==9) {?> selected<?php }?> >September</option>
+                  <option value="10" <?php if ($this->event_month==10){?> selected<?php }?> >October</option>
+                  <option value="11" <?php if ($this->event_month==11){?> selected<?php }?> >November</option>
+                  <option value="12" <?php if ($this->event_month==12){?> selected<?php }?> >December</option>
+                </select>&nbsp;&nbsp;
+
+                <select name="event_year">
+                  <?php
+                    $now_year = date('Y');
+                    for ($t=$now_year; $t<$now_year + 3; $t++) { ?>
+                      <option value=<?php echo "$t "; if ($t==$now_year) {?>selected<?php } echo ">$t"?></option>
+                  <?php  } ?>
+                </select>
+              </td>
+            </tr>
+
+            <tr align="left">
+              <?php if (USE_UTC_TIME) {?>
+                <td class="head"><?php echo $events_starts?>&nbsp;(UTC)</td>
+              <?php } else {?>
+                <td class="head"><?php echo $events_starts?>&nbsp;(Local)</td>
+              <?php }?>
+              <td class="even">
+
+                <select name="event_hour">
+                  <?php for ($h=0; $h<13; $h++) {?> 
+                    <?php if ($h==$this->event_hour) {?>
+                      <option value="<?php echo $h?>" selected ><?php echo $h?> am</option>
+                    <?php } else {?>
+                      <option value="<?php echo $h?>" ><?php echo $h?> am</option>
+                    <?php }?>
+                  <?php }?>
+                  <?php for ($h=12; $h<24; $h++) { ?> 
+                    <?php if ($h==$this->event_hour) {?>
+                      <option value="<?php echo $h?>" selected ><?php echo $h-12?> pm</option>
+                    <?php } else {?>
+                      <option value="<?php echo $h?>" ><?php echo $h-12?> pm</option>
+                    <?php }?>
+                  <?php }?>
+                </select>&nbsp;&nbsp;
+
+                <select name="event_minute" >
+                  <option value="0"  <?php if ($this->event_minute==0) {?>selected<?php }?> >:00</option>
+                  <option value="15" <?php if ($this->event_minute==15){?>selected<?php }?> >:15</option>
+                  <option value="30" <?php if ($this->event_minute==30){?>selected<?php }?> >:30</option>
+                  <option value="45" <?php if ($this->event_minute==45){?>selected<?php }?> >:45</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr align="left">
+              <td class="head"><?php echo $events_duration?></td>
+              <td class="odd">
+                <select name="duration">
+                  <option value="10"  <?php if ($this->duration==10) {?>selected<?php }?> >10 minutes</option>
+                  <option value="15"  <?php if ($this->duration==15) {?>selected<?php }?> >15 minutes</option>
+                  <option value="20"  <?php if ($this->duration==20) {?>selected<?php }?> >20 minutes</option>
+                  <option value="25"  <?php if ($this->duration==25) {?>selected<?php }?> >25 minutes</option>
+                  <option value="30"  <?php if ($this->duration==30) {?>selected<?php }?> >30 minutes</option>
+                  <option value="45"  <?php if ($this->duration==45) {?>selected<?php }?> >45 minutes</option>
+                  <option value="60"  <?php if ($this->duration==60) {?>selected<?php }?> >1 hour</option>
+                  <option value="90"  <?php if ($this->duration==90) {?>selected<?php }?> >1.5 hours</option>
+                  <option value="120" <?php if ($this->duration==120){?>selected<?php }?> >2 hours</option>
+                  <option value="150" <?php if ($this->duration==150){?>selected<?php }?> >2.5 hours</option>
+                  <option value="180" <?php if ($this->duration==180){?>selected<?php }?> >3 hours</option>
+                </select>
+              </td>
+            </tr>
+

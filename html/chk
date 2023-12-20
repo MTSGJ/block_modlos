@@ -1,0 +1,16 @@
+php -l agent.html
+php -l avatars_list.html
+php -l create.html
+php -l delete.html
+php -l delete_event.html
+php -l edit.html
+php -l edit_event.html
+php -l events.html
+php -l map_object.html
+php -l owner.html
+php -l regions_list.html
+php -l reset_region.html
+php -l show_event.html
+php -l show_status.html
+php -l sim.html
+php -l world_map.html

@@ -1,0 +1,180 @@
+
+<style type="text/css">
+  <?php include(CMS_MODULE_PATH."/html/html.css")?>
+</style>
+
+
+<h2><center><?php echo $grid_name."&nbsp;:&nbsp;".$avatar_edit_ttl?></center></h2>
+
+
+<!-- echo Message -->
+<?php if ($this->hasError) {?>
+  <div align="center" style="margin-bottom:10px;">
+    <ul style="list-style:none;">
+      <?php foreach ($this->errorMsg as $mesg) {?>
+        <li><strong style="color: #f01010;"><?php echo $mesg?></strong></li>
+      <?php }?>
+    </ul>
+  </div>
+<?php }?>
+
+<?php if ($this->updated_avatar) {?>
+  <div align="center" style="margin-bottom:10px;">
+    <h4 style="color: #1010e0;"><?php echo $avatar_updated?></h4>
+  </div>
+
+  <table width="520" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#ffffff;" >
+    <?php if ($this->hasPermit) {?>
+      <tr>
+        <td width="120" class="head"><?php echo $uuid_ttl?></td>
+        <td width="320" class="even"style="color: #2060b0;"><?php echo $this->uuid?></td>	
+      </tr>
+    <?php }?>
+
+    <tr>
+      <td width="120" class="head"><?php echo $avatarname_ttl?></td>
+      <td width="320" class="odd" ><?php echo $this->firstname?> <?php echo $this->lastname?></td>	
+    </tr>
+<!--
+    <tr>
+      <td class="head"><?php echo $lastname_ttl?></td>
+      <td class="even"><?php echo $this->lastname?></td>	
+    </tr>
+-->
+    <tr>
+      <td class="head"><?php echo $home_region_ttl?></td>
+      <td class="odd" ><?php echo stripslashes($this->hmregion)?></td>	
+    </tr>
+    <tr>
+      <td class="head"><?php echo $status_ttl?></td>
+      <td class="even" >
+        <?php if (!($this->state&AVATAR_STATE_SYNCDB)) {?>
+          <style="color: #cc0000;"><?php echo $not_syncdb_ttl?>
+        <?php } elseif ($this->state&AVATAR_STATE_INACTIVE) { ?>
+          <style="color: #cc0000;"><?php echo $inactive_ttl?>
+        <?php } elseif ($this->state&AVATAR_STATE_SYNCDB) {?>
+          <style="color: #005500;"><?php echo $active_ttl?>
+        <?php } else {?>
+          <style="color: #cc0000;"><?php echo $unknown_status?>
+        <?php }?>
+        <?php if ($this->use_sloodle and $this->sloodle_num<=0 and $this->state&AVATAR_STATE_SLOODLE) {?>
+          ,&nbsp;<?php echo $sloodle_ttl?>
+        <?php }?>
+          </style>
+      </td>
+    </tr>
+    <?php if ($this->hasPermit or $this->ownername=="") {?>
+      <tr>
+        <td class="head"><?php echo $ownername_ttl ?></td>
+        <td class="odd" ><?php echo stripslashes($this->ownername);?></td>	
+      </tr>
+    <?php }?>
+  </table>
+
+  <table width="520" border="0" align="center" cellpadding="2" cellspacing="2">
+    <tr><td><hr /></td></tr>
+  </table>
+<?php }?>
+
+
+<form name="assignform" id="assignform" action="<?php echo $this->action_url?>" method="POST">
+
+  <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+  <input type="hidden" name="uuid"    value="<?php echo $this->uuid?>" />
+  <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
+
+  <table width="520" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#ffffff;">
+
+    <tr>
+      <td width="120" class="head"><?php echo $avatarname_ttl?></td>
+      <td width="320" class="even"><strong><?php echo $this->firstname?> <?php echo $this->lastname?></strong></td>
+    </tr>
+
+<!--
+    <tr>
+      <td class="head"><?php echo $lastname_ttl?></td>
+      <td class="odd" ><strong><?php echo $this->lastname?></strong></td>
+    </tr>
+-->
+
+    <tr>
+      <td class="head"><?php echo $new_passwd_ttl?></td>
+      <?php if (!($this->state&AVATAR_STATE_INACTIVE)) {?>
+        <td class="even"><input type="password" name="passwd" size="32" maxlength="16" /></td>
+      <?php } else {?>
+        <td class="even">&nbsp;</td>
+      <?php }?>
+    </tr>
+
+    <tr>
+      <td class="head"><?php echo $confirm_pass_ttl?></td>
+      <?php if (!($this->state&AVATAR_STATE_INACTIVE)) {?>
+        <td class="odd"><input type="password" name="confirm_pass" size="32" maxlength="16" /></td>
+      <?php } else {?>
+        <td class="even">&nbsp;</td>
+      <?php }?>
+    </tr>
+
+    <tr>
+      <td class="head"><?php echo $home_region_ttl?></td>
+      <td class="even">
+        <select wide="25" name="hmregion">
+          <?php foreach ($this->regionNames as $region) {?>
+            <?php if ($region==stripslashes($this->hmregion)) {?>
+              <option value="<?php echo $region?>" selected><?php echo $region?></option>
+            <?php } else {?>
+              <option value="<?php echo $region?>" ><?php echo $region?></option>
+            <?php }?>
+          <?php }?>
+		</select>
+	  </td>
+    </tr>
+
+    <tr>
+      <td class="head"><?php echo $status_ttl?></td>
+      <td class="odd" >
+        <input type="radio" name="state" value="<?php echo AVATAR_STATE_ACTIVE?>" <?php if (!($this->state&AVATAR_STATE_INACTIVE)) {?>checked<?php }?> /><?php echo $active_ttl?>&nbsp;&nbsp;&nbsp;
+        <input type="radio" name="state" value="<?php echo AVATAR_STATE_INACTIVE?>" <?php if ($this->state&AVATAR_STATE_INACTIVE) {?>checked<?php }?> /><?php echo $inactive_ttl?>
+      </td>
+    </tr>
+
+    <?php if ($this->use_sloodle and $this->sloodle_num<=0) {?>
+      <?php if ($this->avatars_num>=1 or $this->hasPermit) {?>
+        <tr>
+          <td class="head"><?php echo $sloodle_ttl?></td>
+          <td class="even">
+            <input name="sloodle" type="checkbox" value="sloodle" <?php if ($this->state&AVATAR_STATE_SLOODLE) {?>checked<?php }?> />&nbsp;<?php echo $manage_sloodle?>
+          </td>
+        </tr>
+      <?php }?>
+    <?php }?>
+
+    <?php if ($this->hasPermit) {?>
+      <tr>
+        <td class="head"><?php echo $ownername_ttl?></td>
+        <td class="odd" ><input name="ownername" size="32" maxlength="30" value="<?php echo stripslashes($this->ownername);?>" /></td>
+      </tr>
+    <?php } else {?>
+<!--
+      <tr>
+        <td class="head"><?php echo $manage_avatar_ttl?></td>
+        <td class="even"><input name="nomanage" type="checkbox" value="manage_out" />&nbsp;<?php echo $manage_out?></td>
+      </tr> 
+-->
+    <?php }?>
+
+  </table>
+
+  <div align="center" style="margin-top:10px;">
+    <input name="submit_update" type="submit" id="submit_update" value="<?php echo $update_ttl?>" />&nbsp;
+    <input type="reset"  value="<?php echo $reset_ttl?>" />
+    <?php if ($this->state&AVATAR_STATE_INACTIVE) { ?>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input name="submit_delete" type="submit" id="submit_delete" value="<?php echo $delete_ttl?>" />
+    <?php }?>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input name="cancel" type="submit" id="cancel" value="<?php echo $cancel_ttl?>" />
+  </div>
+
+</form>
+<br />

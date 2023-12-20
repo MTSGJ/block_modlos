@@ -1,0 +1,15 @@
+php -l avatars_list.php
+php -l avatars_online.php
+php -l create_avatar.php
+php -l currency_log.php
+php -l delete_avatar.php
+php -l delete_event.php
+php -l edit_avatar.php
+php -l edit_event.php
+php -l events_list.php
+php -l map_action.php
+php -l owner_avatar.php
+php -l regions_list.php
+php -l reset_region.php
+php -l show_event.php
+php -l show_status.php

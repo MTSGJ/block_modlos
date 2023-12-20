@@ -1,0 +1,176 @@
+
+<style type="text/css">
+  <?php include(CMS_MODULE_PATH."/html/html.css")?>
+</style>
+
+<table width="85%" border="0" align="center" cellpadding="0" cellspacing="0" >
+  <tr bgcolor="#d8e8e8">
+    <td align=center >
+      <div align="center">
+        <h2><?php echo $grid_name?>&nbsp;:&nbsp;<?php echo $events_list_ttl?></h2>
+      </div>
+      <strong><?php echo $events_make_link?>&nbsp;</strong>
+      <a href=<?php echo $this->make_url?> ><strong><?php echo $events_click_here?></strong></a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Page Navi -->
+<table width=85% cellpadding=3 border=0 cellspacing=0 bgcolor=#999999 align="center">
+  <tr style="filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#0000cc', endColorStr='#ffffff', gradientType='1');">
+
+    <td>&nbsp;</td>
+    <td width=200>
+      <strong style="color: #202020;">&nbsp;<?php echo number_format($this->number)?> <?php echo $events_found?></strong>
+    </td>
+
+    <!-- icon line -->
+    <td width="50">
+      <?php if ($this->icon[0]=="on") {?>
+        <a href="<?php echo $this->action_url.$plimit_amp.$pstart_.'0'?>" target="_self">
+      <?php }?>
+        <img src="<?php echo $module_url.'/images/icons/icon_back_more_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
+      <?php if ($this->icon[0]=="on") {?>
+        </a>
+      <?php }?>
+    </td>
+
+    <td width="50">
+      <?php if ($this->icon[0]=="on") {?>
+        <a href="<?php echo $this->action_url.$plimit_amp.$pstart_.$this->pnum[0]?>" target="_self">
+      <?php }?>
+        <img src="<?php echo $module_url.'/images/icons/icon_back_one_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
+      <?php if ($this->icon[0]=="on") {?>
+        </a>
+      <?php }?>
+    </td>
+
+    <td width="200" align=center style="color: #000;">
+      <?php echo $page_num." ".$this->sitestart." ".$page_num_of." ".$this->sitemax?>&nbsp;&nbsp;
+    </td>
+
+    <td width="50">
+      <?php if ($this->icon[1]=="on") {?>
+        <a href="<?php echo $this->action_url.$plimit_amp.$pstart_.$this->pnum[1]?>" target="_self">
+      <?php }?>
+        <img src="<?php echo $module_url.'/images/icons/icon_forward_one_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
+      <?php if ($this->icon[1]=="on") {?>
+        </a>
+      <?php }?>
+    </td>
+
+    <td width="50">
+      <?php if ($this->icon[1]=="on") {?>
+        <a href="<?php echo $this->action_url.$plimit_amp.$pstart_.$this->pnum[2]?>" target="_self">
+      <?php }?>
+        <img src="<?php echo $module_url.'/images/icons/icon_forward_more_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
+      <?php if ($this->icon[1]=="on") {?>
+        </a>
+      <?php }?>
+    </td>
+
+    <td width="10"></td>
+    <td width="10"></td>
+
+    <td width="30">
+     <a href="<?php echo $this->action_url.$pstart_.'0'.$plimit_.'10'?>" target="_self">
+        <img src="<?php echo $module_url.'/images/icons/'.$this->icon[3].'.gif'?>" width=15 height=15 border="0" alt="Limit 10">
+      </a>
+    </td>
+    <td width="30">
+      <a href="<?php echo $this->action_url.$pstart_.'0'.$plimit_.'25'?>" target="_self">
+        <img src="<?php echo $module_url.'/images/icons/'.$this->icon[4].'.gif'?>" width=15 height=15 border="0" alt="Limit 25">
+      </a>
+    </td>
+    <td width="30">
+      <a href="<?php echo $this->action_url.$pstart_.'0'.$plimit_.'50'?>" target="_self">
+        <img src="<?php echo $module_url.'/images/icons/'.$this->icon[5].'.gif'?>" width=15 height=15 border="0" alt="Limit 50">
+      </a>
+    </td>
+    <td width="30">
+      <a href="<?php echo $this->action_url.$pstart_.'0'.$plimit_.'100'?>" target="_self">
+        <img src="<?php echo $module_url.'/images/icons/'.$this->icon[6].'.gif'?>" width=15 height=15 border="0" alt="Limit 100">
+      </a>
+    </td>
+
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+
+
+<table width="85%" border=0 align=center cellpadding="0" cellspacing="0">
+  <tbody>
+
+    <!-- Title Line -->
+    <tr bgcolor="#c0c0c0">
+      <td width="15" height=26>&nbsp;</td>
+      <td width="30" ><strong style="color: #222;">&nbsp;No.</strong></td>
+      <td width="140">
+        <?php if (USE_UTC_TIME) {?>
+          <strong style="color: #222;">&nbsp;&nbsp;<?php echo $events_date?>&nbsp;(UTC)</strong>
+        <?php }else{?>
+          <strong style="color: #222;">&nbsp;&nbsp;<?php echo $events_date?>&nbsp;(Local)</strong>
+        <?php }?>
+      </td>
+      <td width="60" >
+        <strong style="color: #222;"><?php echo $events_type?></strong>
+      </td>
+      <td width="300">
+        <strong style="color: #222;"><?php echo $events_name?></strong>
+      </td>
+      <td width="160">
+        <strong style="color: #222;"><?php echo $events_category?></strong>
+      </td>
+      <td width="120">
+        <strong style="color: #222;"><?php echo $events_creator?></strong>
+      </td>
+      <td width="80" >&nbsp;</td>
+      <td width="1"  >&nbsp;</td>
+    </tr>
+
+    <!-- Data -->
+    <?php foreach ($this->db_data as $dat) {?>
+      <?php if ($dat['num']%2==0) {?>
+      <tr style='background-color: #d8d8d8;'>
+      <?php } else {?>
+      <tr style='background-color: #f0f0f0;'>
+      <?php }?>
+        <td height=26>&nbsp;</td>
+        <td><strong style="color: #000;">&nbsp;<?php echo $dat['num']+1+$this->pstart;?></strong></td>
+
+        <td><strong style="color: #000;"><?php echo $dat['time'];?></strong> </td>
+        <td>
+          <strong style="color: #ff2222;"><img height=20px width=20px <?php echo $dat['type'];?> /></strong>
+        </td>
+        <td style="color: #115500;">
+          <a href=<?php echo $this->show_url.$dat['EventID'];?>   ><strong><?php echo $dat['Name'];?></strong></a>
+        </td>
+
+        <td><strong style="color: #551111;"><?php echo $Categories[$dat['Category']];?></strong></td>
+
+        <td style="color: #2222cc;">
+          <?php if (!$this->isGuest) {?>
+          <a style="cursor:pointer;" onClick="window.open('<?php echo $module_url?>/helper/agent.php?agent=<?php echo $dat['CreatorUUID'];?>','','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+            <strong><?php echo $dat['creator'];?></strong>
+          </a>
+          <?php } else {?>
+            <strong><?php echo $dat['creator'];?></strong>
+          <?php }?>
+        </td>
+        <td>
+          <?php if ($this->hasPermit or $this->userid==$dat['uid']) {?>
+            <a href=<?php echo $this->edit_url.$dat['EventID'];?>   ><strong style="color: #cc1010;"><?php echo $modlos_edit?></strong></a>&nbsp;&nbsp;
+            <a href=<?php echo $this->delete_url.$dat['EventID'];?> ><strong style="color: #cc1010;"><?php echo $modlos_delete?></strong></a>
+          <?php } else {?>
+            &nbsp;
+          <?php }?>
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+    <?php }?>
+
+  </tbody>
+</table>
+<br />

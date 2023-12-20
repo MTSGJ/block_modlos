@@ -1,0 +1,46 @@
+
+<style type="text/css">
+  <?php include(CMS_MODULE_PATH."/html/html.css")?>
+</style>
+
+<table width="85%" border="0" align="center" cellpadding="0" cellspacing="0" >
+  <tr>
+    <td bgcolor="#e8e8e8">
+      <div align="center">
+        <h2><?php echo $grid_name?>&nbsp;:&nbsp;<?php echo $world_map?></h2>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<table width="85%" border="0" align="center" cellpadding="0" cellspacing="0" >
+  <tr>
+    <td align="center">
+      <form action="<?php echo $action_url?>" method="POST">
+        PosX <input type="text" name="ctX" id="ctX" size="6" value="<?php echo $centerX?>" style="margin-right: 20px;"/>
+        PosY <input type="text" name="ctY" id="ctX" size="6" value="<?php echo $centerY?>" style="margin-right: 20px;"/>
+        Size <select wide="8" name="size" style="margin-right: 20px;">
+               <option value="2"   <?php if ($tsize==2)  {?>selected<?php }?> >2</option>
+               <option value="4"   <?php if ($tsize==4)  {?>selected<?php }?> >4</option>
+               <option value="8"   <?php if ($tsize==8)  {?>selected<?php }?> >8</option>
+               <option value="16"  <?php if ($tsize==16) {?>selected<?php }?> >16</option>
+               <option value="32"  <?php if ($tsize==32) {?>selected<?php }?> >32</option>
+               <option value="64"  <?php if ($tsize==64) {?>selected<?php }?> >64</option>
+               <option value="128" <?php if ($tsize==128){?>selected<?php }?> >128</option>
+               <option value="512" <?php if ($tsize==512){?>selected<?php }?> >512</option>
+            </select>
+        <input type="submit" name="map_go" id="map_go" value=" GO " style="margin-right: 30px;"/>
+        <a href="<?php echo $action_url?>">Center Regions</a>
+      </form>
+    </td>
+  </tr>
+</table>
+
+<?php
+    $object_height = 600;
+//    $object_height = 60;
+?>
+<center>
+  <object width="80%" height="<?php echo $object_height?>" type="text/html" data="<?php echo $object_url?>"></object>
+</center>
+<br />

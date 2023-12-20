@@ -1,0 +1,269 @@
+
+<style type="text/css">
+  <?php include(CMS_MODULE_PATH."/html/html.css")?>
+</style>
+
+<table width="85%" border="0" align="center" cellpadding="0" cellspacing="0" >
+  <tr>
+    <td bgcolor="#e8d8d8">
+      <div align="center">
+        <h2><?php echo $grid_name."&nbsp;:&nbsp;".$regions_list?></h2>
+      </div>
+      <?php echo $content?>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Page Navi -->
+<table width=85% cellpadding=3 border=0 cellspacing=0 bgcolor=#999999 align="center">
+  <tr style="filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#0000cc', endColorStr='#ffffff', gradientType='1');">
+    <td>&nbsp;</td>
+
+    <td width="200">
+      <strong style="color: #202020;"><strong>&nbsp;<?php echo number_format($this->number)." ".$regions_found?></strong>
+    </td>
+
+    <td width="50">
+      <?php if ($this->icon[0]=="on") {?>
+        <a href="<?php echo $action_url.$order_amp.$plimit_amp.$pstart_.'0'?>" target="_self">
+      <?php }?>
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_back_more_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
+      <?php if ($this->icon[0]=="on") {?>
+        </a>
+      <?php }?>
+    </td>
+
+    <td width="50">
+      <?php if ($this->icon[0]=="on") {?>
+        <a href="<?php echo $action_url.$order_amp.$plimit_amp.$pstart_.$this->pnum[0]?>" target="_self">
+      <?php }?>
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_back_one_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
+      <?php if ($this->icon[0]=="on") {?>
+        </a>
+      <?php }?>
+    </td>
+
+    <td width="200" align=center style="color: #000;">
+      <?php echo $page_num." ".$this->sitestart." ".$page_num_of." ".$this->sitemax?>&nbsp;&nbsp;
+    </td>
+
+    <td width="50">
+      <?php if ($this->icon[1]=="on") {?>
+        <a href="<?php echo $action_url.$order_amp.$plimit_amp.$pstart_.$this->pnum[1]?>" target="_self">
+      <?php }?>
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_forward_one_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
+      <?php if ($this->icon[1]=="on") {?>
+        </a>
+      <?php }?>
+    </td>
+
+    <td width="50">
+      <?php if ($this->icon[1]=="on") {?>
+        <a href="<?php echo $action_url.$order_amp.$plimit_amp.$pstart_.$this->pnum[2]?>" target="_self">
+      <?php }?>
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_forward_more_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
+      <?php if ($this->icon[1]=="on") {?>
+        </a>
+      <?php }?>
+    </td>
+
+    <td width="10"></td>
+    <td width="10"></td>
+
+    <td width="30">
+      <a href="<?php echo $action_url.$order_amp.$pstart_.'0'.$plimit_.'10'?>" target="_self">
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[3].'.gif'?>" width=15 height=15 border="0" alt="Limit 10">
+      </a>
+    </td>
+    <td width="30">
+      <a href="<?php echo $action_url.$order_amp.$pstart_.'0'.$plimit_.'25'?>" target="_self">
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[4].'.gif'?>" width=15 height=15 border="0" alt="Limit 25">
+      </a>
+    </td>
+    <td width="30">
+      <a href="<?php echo $action_url.$order_amp.$pstart_.'0'.$plimit_.'50'?>" target="_self">
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[5].'.gif'?>" width=15 height=15 border="0" alt="Limit 50">
+      </a>
+    </td>
+    <td width="30">
+      <a href="<?php echo $action_url.$order_amp.$pstart_.'0'.$plimit_.'100'?>" target="_self">
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[6].'.gif'?>" width=15 height=15 border="0" alt="Limit 100">
+      </a>
+    </td>
+    <td></td>
+
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+
+
+<!-- search -->
+<table width="85%" cellpadding="3" border="0" cellspacing="1" bgcolor="#e0e0e0" align="center">
+  <form action="<?php echo $this->search_url.$plimit_amp.$order_amp?>" method="POST">
+    <tr bgcolor="#f0f0a0">
+      <td style="width:30px;  table-layout:fixed;">&nbsp;</td>
+      <td style="width:400px; table-layout:fixed; color:#000;">
+        <strong><?php echo $region_search?>:</strong>&nbsp;&nbsp;
+        <strong><?php echo $region_name_ttl?></strong>&nbsp;&nbsp;
+        <input type="text" name="regionname" size="15" value="<?php echo htmlspecialchars($this->regionname)?>" style="height:16px;" />
+      </td>
+      <td style="width:120px; table-layout:fixed;">
+        <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
+        <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+        <input type="Submit" value="Search" style="height:26px;" />&nbsp;&nbsp;&nbsp;
+      </td>
+      <td style="width:100px; table-layout:fixed; color:#000;">
+        <a href="<?php echo $this->action_url.$plimit_amp.$pstart_amp.$order_amp.$action_amp?>" target="_self">
+          <strong style="color:#802020;"><?php echo $reset_ttl?></strong>
+        </a>
+      </td>
+      <td>&nbsp;</td>
+    </tr>
+  </form>
+</table>
+
+
+<table width="85%" height="70%" border=0 align=center cellpadding="0" cellspacing="0">
+  <tbody>
+
+    <!-- Title Line -->
+    <tr bgcolor="#c0c0c0">
+      <td width="15" height=26>&nbsp;</td>
+      <td width="40" style="color: #222;"><strong><?php echo $number_ttl?></strong></td>
+
+      <?php if (!$this->isGuest) {?>
+        <td width="50" style="color: #222;"><strong><?php echo $operation_ttl?></strong></td>
+      <?php }?>
+
+      <td width="200">
+        <a style="cursor:pointer;" onclick="document.location.href='<?php echo $action_url.$pstart_amp.$plimit_amp.$desc_name?>&amp;order=name'">
+          <strong><?php echo $region_name_ttl?></strong>
+        </a>
+      </td>
+      <td width="60">
+        <a style="cursor:pointer;" onclick="document.location.href='<?php echo $action_url.$pstart_amp.$plimit_amp.$desc_x?>&amp;order=x'">
+          <strong><?php echo $location_x?></strong>
+        </a>
+      </td>
+      <td width="60">
+        <a style="cursor:pointer;" onclick="document.location.href='<?php echo $action_url.$pstart_amp.$plimit_amp.$desc_y?>&amp;order=y'">
+          <strong><?php echo $location_y?></strong>
+        </a>
+      </td>
+      <td width="20" >&nbsp;</td>
+      <td width="200">
+        <a style="cursor:pointer;" onclick="document.location.href='<?php echo $action_url.$pstart_amp.$plimit_amp.$desc_avatar?>&amp;order=avatar'">
+          <strong><?php echo $manager_name_ttl?></strong>
+        </a>
+      </td>
+      <td width="30" >&nbsp;</td>
+      <td width="200">
+        <?php if (!$this->isGuest) {?>
+          <a style="cursor:pointer;" onclick="document.location.href='<?php echo $action_url.$pstart_amp.$plimit_amp.$desc_ip?>&amp;order=ip'">
+            <strong><?php echo $server_name?></strong>
+          </a>
+        <?php }?>
+      </td>
+
+      <td width="200">
+        <?php if (!$this->isGuest and $this->show_all) {?>
+          <strong style="color: #222;"><?php echo $owner_ttl?></strong>
+        <?php }?>
+      </td>
+
+      <td width="15" >&nbsp;</td>
+    </tr>
+
+
+    <!-- Data -->
+    <?php foreach ($this->db_data as $dat) {?>
+      <?php if ($dat['num']%2==0) {?>
+      <tr style='background-color: #e8e8e8;'>
+      <?php } else {?>
+      <tr style='background-color: #f8f8f8;'>
+      <?php }?>
+        <td width=15 height=26>&nbsp;</td>
+        <td width=40 style="color: #000;"><strong>&nbsp;<?php echo $dat['num']+1+$this->pstart?></strong></td>
+
+        <?php if (!$this->isGuest) {?>
+          <td>
+            <?php if ($has_permit or $dat['user_id']==$USER->id) { ?>
+              <a href="<?php echo $this->reset_url.'&amp;region='.$dat['UUID']?>" >
+                <strong style="color: #cc1010;"><?php echo $disconnect_ttl?></strong>
+              </a>
+            <?php } else {?>
+              &nbsp;-&nbsp;
+            <?php }?> 
+          </td>
+        <?php }?> 
+
+        <td style="color: #0055cc;">
+          <?php if (!$this->isGuest) {?>
+            <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/sim.php'.$url_params.'&region='.$dat['UUID']?>','','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+              <strong><?php echo $dat['regionName']?></strong>
+            </a>
+          <?php } else {?>
+            <strong style="color: #0055cc;"><?php echo htmlspecialchars($dat['regionName'])?></strong>
+          <?php }?>
+        </td>
+
+        <td>
+          <?php if (!$this->isGuest) {?>
+            <a href="<?php echo $worldmap_url.'&amp;ctX='.$dat['locX'].'&amp;ctY='.$dat['locY']?>" target="_blank">
+              <strong style="color: #115500;"><?php echo $dat['locX']?></strong>
+            </a>
+          <?php } else {?>
+            <strong style="color: #115500;"><?php echo $dat['locX']?></strong>
+          <?php }?>
+        </td>
+        <td>
+          <?php if (!$this->isGuest) {?>
+            <a href="<?php echo $worldmap_url.'&amp;ctX='.$dat['locX'].'&amp;ctY='.$dat['locY']?>" target="_blank">
+              <strong style="color: #115500;"><?php echo $dat['locY']?></strong>
+            </a>
+          <?php } else {?>
+            <strong style="color: #115500;"><?php echo $dat['locY']?></strong>
+          <?php }?>
+        </td>
+        <td>&nbsp;</td>
+
+        <td style="color: #2222ff;">
+          <?php if (!$this->isGuest) {?>
+            <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_params.'&agent='.$dat['avatar_uuid']?>','','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+              <strong style="color: #005;"><?php echo htmlspecialchars($dat['avatar_name'])?></strong>
+            </a>
+          <?php } else {?>
+            <strong style="color: #005;"><?php echo htmlspecialchars($dat['avatar_name'])?></strong>
+          <?php }?>
+        </td>
+        <td>&nbsp;</td>
+
+        <td style="color: #2266aa;">
+          <?php if (!$this->isGuest) {?>
+            <a style="cursor:pointer;" onClick="window.open('http://<?php echo $dat['serverName'].':'.$dat['serverPort']?>/SStats/','<?php echo $dat['serverName']?>','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=1000,height=800')">
+              <strong style="color: #055;"><?php echo $dat['serverName']?></strong>
+            </a>
+          <?php }?>
+        </td>
+
+        <td style="color: #2266aa;">
+          <?php if (!$this->isGuest and $this->show_all) {?>
+            <?php if ($dat['owner_name']!=' - ') { ?>
+              <a href="<?php echo $this->action_url?>&amp;action=personal&amp;userid=<?php echo $dat['user_id'] ?>">
+                <strong style="color: #505;"><?php echo htmlspecialchars($dat['owner_name'])?></strong>
+              </a>
+            <?php } else {?>
+              <strong style="color: #505;"><?php echo htmlspecialchars($dat['owner_name'])?></strong>
+            <?php }?>
+          <?php }?>
+        </td>
+
+        <td>&nbsp;</td>
+      </tr>
+    <?php }?>
+
+  </tbody>
+</table>
+<br />
