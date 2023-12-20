@@ -7,6 +7,11 @@ if [ -d jbxl ]; then
 else
     #svn co http://www.nsl.tuis.ac.jp/svn/php/jbxl/trunk jbxl
     git clone https://github.com/JunkBox-Library/jbxl-php.git jbxl
+    cd include
+    ln -s ../jbxl/jbxl_moodle_tools.php .
+    ln -s ../jbxl/jbxl_tools.php .
+    ln -s ../jbxl/tools.func.php .
+    cd ..
 fi
 
 if [ -d flotsam_XmlRpcGroup ]; then
@@ -15,6 +20,14 @@ if [ -d flotsam_XmlRpcGroup ]; then
 else
     #svn co http://www.nsl.tuis.ac.jp/svn/opensim/flotsam_XmlRpcGroup/trunk flotsam_XmlRpcGroup
     git clone https://github.com/MTSGJ/flotsam_XmlRpcGroup.git
+    cd helper
+    ln -s ../flotsam_XmlRpcGroup/xmlrpc.php .
+    ln -s ../flotsam_XmlRpcGroup/xmlrpci.php .
+    ln -s ../flotsam_XmlRpcGroup/xmlgroups.php .
+    ln -s ../flotsam_XmlRpcGroup/phpxmlrpclib .
+    cd ../include
+    ln -s ../flotsam_XmlRpcGroup/xmlgroups_config.php .
+    cd ..
 fi
 
 if [ -d opensim.phplib ]; then
@@ -23,6 +36,15 @@ if [ -d opensim.phplib ]; then
 else
     #svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.phplib/trunk opensim.phplib
     git clone https://github.com/MTSGJ/opensim.phplib.git
+    cd ../include
+    ln -s ../opensim.helper/map_script.php .
+    ln -s ../opensim.phplib/mysql.func.php .
+    ln -s ../opensim.phplib/opensim.mysql.basicsearch.php .
+    ln -s ../opensim.phplib/opensim.mysql.osprofile.php .
+    ln -s ../opensim.phplib/opensim.mysql.ossearch.php .
+    ln -s ../opensim.phplib/opensim.mysql.php .
+    ln -s ../opensim.phplib/opensim.mysql.userprofile.php .
+    cd ..
 fi
 
 if [ -d opensim.helper ]; then
@@ -31,6 +53,18 @@ if [ -d opensim.helper ]; then
 else
     #svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.helper/trunk opensim.helper
     git clone https://github.com/MTSGJ/opensim.helper.git
+    cd helper
+    ln -s ../opensim.helper/currency.php .
+    ln -s ../opensim.helper/helpers.php .
+    ln -s ../opensim.helper/landtool.php .
+    ln -s ../opensim.helper/loginpage.php .
+    ln -s ../opensim.helper/loginscreen .
+    ln -s ../opensim.helper/loginscreen.php .
+    ln -s ../opensim.helper/offline.php .
+    ln -s ../opensim.helper/region_image.php .
+    cd ../include
+    ln -s ../opensim.helper/map_script.php .
+    cd ..
 fi
 
 if [ -d opensim.modules ]; then

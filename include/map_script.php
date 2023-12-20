@@ -1,1 +1,0 @@
-../opensim.helper/map_script.php
