@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# jbxl
+rm -fr jbxl
+rm -f include/jbxl_moodle_tools.php 
+rm -f include/jbxl_tools.php 
+rm -f include/tools.func.php
+
+# flotsam_XmlRpcGroup
+rm -fr flotsam_XmlRpcGroup
+rm -f helper/xmlrpc.php
+rm -f helper/xmlrpci.php
+rm -f helper/xmlgroups.php
+rm -f helper/phpxmlrpclib
+rm -f include/xmlgroups_config.php
+
+# opensim.phplib
+rm -fr opensim.phplib
+rm -f include/map_script.php 
+rm -f include/mysql.func.php 
+rm -f include/opensim.mysql.basicsearch.php 
+rm -f include/opensim.mysql.osprofile.php 
+rm -f include/opensim.mysql.ossearch.php 
+rm -f include/opensim.mysql.php 
+rm -f include/opensim.mysql.userprofile.php 
+
+# opensim.helper
+rm -fr opensim.helper
+rm -f helper/currency.php
+rm -f helper/helpers.php
+rm -f helper/landtool.php
+rm -f helper/loginpage.php 
+rm -f helper/loginscreen 
+rm -f helper/loginscreen.php
+rm -f helper/offline.php
+rm -f helper/region_image.php
+rm -f include/map_script.php
+
+# opensim.modules
+rm -fr opensim.modules
+rm -f helper/mute.php
+rm -f helper/profile.php
+rm -f helper/parser.php
+rm -f helper/query.php
+rm -f helper/register.php
+rm -f helper/cron_search.php
+rm -f include/profile_config.php
+rm -f include/search_config.php
+rm -f include/message_config.php
+

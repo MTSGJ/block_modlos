@@ -1,11 +1,15 @@
-#svn update
-git pull
+#!/bin/bash
 
+OWN=`ls -ld .|awk -F" " '{print $3"."$4}'`
+chown -R $OWN jbxl
+
+git pull
+chown -R $OWN jbxl
+
+# jbxl
 if [ -d jbxl ]; then
-    #svn update jbxl
     (cd jbxl; git pull)
 else
-    #svn co http://www.nsl.tuis.ac.jp/svn/php/jbxl/trunk jbxl
     git clone https://github.com/JunkBox-Library/jbxl-php.git jbxl
     cd include
     ln -s ../jbxl/jbxl_moodle_tools.php .
@@ -13,12 +17,11 @@ else
     ln -s ../jbxl/tools.func.php .
     cd ..
 fi
+chown -R $OWN jbxl
 
 if [ -d flotsam_XmlRpcGroup ]; then
-    #svn update flotsam_XmlRpcGroup
     (cd flotsam_XmlRpcGroup; git pull)
 else
-    #svn co http://www.nsl.tuis.ac.jp/svn/opensim/flotsam_XmlRpcGroup/trunk flotsam_XmlRpcGroup
     git clone https://github.com/MTSGJ/flotsam_XmlRpcGroup.git
     cd helper
     ln -s ../flotsam_XmlRpcGroup/xmlrpc.php .
@@ -29,14 +32,13 @@ else
     ln -s ../flotsam_XmlRpcGroup/xmlgroups_config.php .
     cd ..
 fi
+chown -R $OWN flotsam_XmlRpcGroup
 
 if [ -d opensim.phplib ]; then
-    #svn update opensim.phplib
     (cd opensim.phplib; git pull)
 else
-    #svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.phplib/trunk opensim.phplib
     git clone https://github.com/MTSGJ/opensim.phplib.git
-    cd ../include
+    cd include
     ln -s ../opensim.helper/map_script.php .
     ln -s ../opensim.phplib/mysql.func.php .
     ln -s ../opensim.phplib/opensim.mysql.basicsearch.php .
@@ -46,12 +48,11 @@ else
     ln -s ../opensim.phplib/opensim.mysql.userprofile.php .
     cd ..
 fi
+chown -R $OWN flotsam_XmlRpcGroup
 
 if [ -d opensim.helper ]; then
-    #svn update opensim.helper
     (cd opensim.helper; git pull)
 else
-    #svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.helper/trunk opensim.helper
     git clone https://github.com/MTSGJ/opensim.helper.git
     cd helper
     ln -s ../opensim.helper/currency.php .
@@ -66,6 +67,7 @@ else
     ln -s ../opensim.helper/map_script.php .
     cd ..
 fi
+chown -R $OWN opensim.helper
 
 if [ -d opensim.modules ]; then
     #svn update opensim.modules
