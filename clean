@@ -34,7 +34,6 @@ rm -f helper/loginscreen
 rm -f helper/loginscreen.php
 rm -f helper/offline.php
 rm -f helper/region_image.php
-rm -f include/map_script.php
 
 # opensim.modules
 rm -fr opensim.modules
