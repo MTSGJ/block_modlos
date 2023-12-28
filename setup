@@ -18,6 +18,7 @@ else
 fi
 chown -R $OWN jbxl
 
+# flotsam_XmlRpcGroup
 if [ -d flotsam_XmlRpcGroup ]; then
     (cd flotsam_XmlRpcGroup; git pull)
 else
@@ -33,6 +34,7 @@ else
 fi
 chown -R $OWN flotsam_XmlRpcGroup
 
+# opensim.phplib
 if [ -d opensim.phplib ]; then
     (cd opensim.phplib; git pull)
 else
@@ -49,6 +51,7 @@ else
 fi
 chown -R $OWN opensim.phplib
 
+# opensim.helper
 if [ -d opensim.helper ]; then
     (cd opensim.helper; git pull)
 else
@@ -66,6 +69,7 @@ else
 fi
 chown -R $OWN opensim.helper
 
+# opensim.modules
 if [ -d opensim.modules ]; then
     (cd opensim.modules; git pull)
 else
