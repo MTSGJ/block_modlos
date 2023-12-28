@@ -1,15 +1,15 @@
 #!/bin/sh
 
-#svn ci -m ""
 git commit -a -m "by commit command in block_modlos"
 git push
 
 #
 (cd jbxl && git commit -a -m "by commit command in block_modlos" && git push)
-#(cd opensimwiredux && )
 (cd flotsam_XmlRpcGroup && git commit -a -m "by commit command in block_modlos" && git push)
 (cd opensim.phplib && git commit -a -m "by commit command in block_modlos" && git push)
-(cd opensim.modules && git commit -a -m "by commit command in block_modlos" && git push)
 (cd opensim.helper && git commit -a -m "by commit command in block_modlos" && git push)
+(cd opensim.modules && git commit -a -m "by commit command in block_modlos" && git push)
+
+#(cd opensimwiredux && )
 #(cd osprofile && git commit -a -m "by commit command in block_modlos" && git push)
 #(cd ossearch && git commit -a -m "by commit command in block_modlos" && git push)
