@@ -7,6 +7,6 @@
 
 
 ### Wiki
-* English: https://www.nsl.tuis.ac.jp/xoops/modules/xpwiki/?Modlos%20%28E%29
-* 日本語(Japanese): https://www.nsl.tuis.ac.jp/xoops/modules/xpwiki/?Modlos
+* English: https://polaris.star-dust.jp/pukiwiki/?Modlos
+* 日本語(Japanese): https://polaris.star-dust.jp/pukiwiki/?Modlos+%28J%29
   
