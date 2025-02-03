@@ -7,9 +7,11 @@ $plugin->component = 'block_modlos';    // Full name of the plugin (used for dia
 $plugin->cron      = 0;
 $plugin->maturity  = MATURITY_STABLE;
 
-$plugin->release   = '3.4.0';
+//$plugin->release = '3.4.1';
+$PLUGIN_release    = '3.4.1';
 
-$plugin->version   = 2023122800;    // to github version
+$plugin->version   = 2025020300;    // delete $plugin->release
+//$plugin->version = 2023122800;    // to github version
 //$plugin->version = 2023081000;    // fix sim image bug
 //$plugin->version = 2016121000;    // fix bugs: opensim_get_avatar_uuid()
 //$plugin->version = 2016121000;    // fix bugs: message, profile and search config file is 0 byte
