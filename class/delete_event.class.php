@@ -43,7 +43,7 @@ class  DeleteEvent
         // for Guest
         $this->isGuest = isguestuser();
         if ($this->isGuest) {
-            print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
+            jbxl_print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
         }
 
         $this->hasPermit  = hasModlosPermit($course_id);
@@ -58,19 +58,19 @@ class  DeleteEvent
         $this->event_id = optional_param('eventid', '0', PARAM_INT);
         if ($this->event_id<=0) {
             $mesg = ' '.get_string('modlos_bad_event_id', 'block_modlos')." ($this->event_id)";
-            print_error($mesg, '', $this->return_url);
+            jbxl_print_error($mesg, '', $this->return_url);
         }
 
         // Read DB
         $this->event = modlos_get_event($this->event_id);
         if ($this->event==null) {
             $mesg = ' '.get_string('modlos_not_exist_event', 'block_modlos')." ($this->event_id)";
-            print_error($mesg, '', $this->return_url);
+            jbxl_print_error($mesg, '', $this->return_url);
         }
         $this->uid = $this->event['uid'];
 
         if (!$this->hasPermit and $this->userid!=$this->uid) {
-            print_error('modlos_access_forbidden', 'block_modlos', $this->return_url);
+            jbxl_print_error('modlos_access_forbidden', 'block_modlos', $this->return_url);
         }
 
         $this->avatars_num = modlos_get_avatars_num($USER->id);

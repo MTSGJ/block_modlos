@@ -48,7 +48,7 @@ class  ResetRegion
         // for Guest
         $this->isGuest = isguestuser();
         if ($this->isGuest) {
-            print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
+            jbxl_print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
         }
         $this->hasPermit = hasModlosPermit($course_id);
 
@@ -80,7 +80,7 @@ class  ResetRegion
         // get UUID from POST or GET
         if (!isGUID($uuid)) {
             $mesg = ' '.get_string('modlos_invalid_uuid', 'block_modlos')." ($uuid)";
-            print_error($mesg, '', $return_url);
+            jbxl_print_error($mesg, '', $return_url);
         }
 
         // get uid from Modlos and Sloodle DB
@@ -100,7 +100,7 @@ class  ResetRegion
         $this->serverPort = $region['serverHttpPort'];
 
         if (!$this->hasPermit and $USER->id!=$this->uid) {
-            print_error('modlos_access_forbidden', 'block_modlos', $this->return_url);
+            jbxl_print_error('modlos_access_forbidden', 'block_modlos', $this->return_url);
         }
     }
 
@@ -111,7 +111,7 @@ class  ResetRegion
 
         //
         if (!$this->hasPermit and $USER->id!=$this->uid) {
-            print_error('modlos_access_forbidden', 'block_modlos', $return_url);
+            jbxl_print_error('modlos_access_forbidden', 'block_modlos', $return_url);
         }
 
         // Cancel

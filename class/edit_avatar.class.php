@@ -52,7 +52,7 @@ class  EditAvatar
         // for Guest
         $this->isGuest = isguestuser();
         if ($this->isGuest) {
-            print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
+            jbxl_print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
         }
 
         $userid = optional_param('userid', '0', PARAM_INT);
@@ -79,7 +79,7 @@ class  EditAvatar
         $uuid = optional_param('uuid', '', PARAM_TEXT);
         if (!isGUID($uuid)) {
             $mesg = ' '.get_string('modlos_invalid_uuid', 'block_modlos')." ($uuid)";
-            print_error($mesg, '', $this->return_url);
+            jbxl_print_error($mesg, '', $this->return_url);
         }
         $this->uuid = $uuid;
         $this->use_sloodle = $CFG->modlos_cooperate_sloodle;
@@ -94,7 +94,7 @@ class  EditAvatar
 
         $this->hasPermit = hasModlosPermit($course_id);
         if (!$this->hasPermit and $USER->id!=$this->uid) {
-            print_error('modlos_access_forbidden', 'block_modlos', $this->return_url);
+            jbxl_print_error('modlos_access_forbidden', 'block_modlos', $this->return_url);
         }
 
         $this->avatars_num = modlos_get_avatars_num($USER->id);

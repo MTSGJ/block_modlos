@@ -70,7 +70,7 @@ class  AvatarsList
         // for Guest
         $this->isGuest = isguestuser();
         if ($this->isGuest) {
-            print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
+            jbxl_print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
         }
 
         $this->course_id    = $course_id;
@@ -111,7 +111,7 @@ class  AvatarsList
         // Post Check
         if (data_submitted()) {
             if (!confirm_sesskey()) {
-                print_error('modlos_sesskey_error', 'block_modlos', $this->action_url);
+                jbxl_print_error('modlos_sesskey_error', 'block_modlos', $this->action_url);
             }
         }
 

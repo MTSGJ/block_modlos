@@ -44,7 +44,7 @@ class  DeleteAvatar
         // for Guest
         $this->isGuest = isguestuser();
         if ($this->isGuest) {
-            print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
+            jbxl_print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
         }
 
         $url_params = '?course='.$course_id;
@@ -57,7 +57,7 @@ class  DeleteAvatar
         $uuid = optional_param('uuid', '', PARAM_TEXT);
         if (!isGUID($uuid)) {
             $mesg = ' '.get_string('modlos_invalid_uuid', 'block_modlos').' ($uuid)';
-            print_error($mesg, '', $this->return_url);
+            jbxl_print_error($mesg, '', $this->return_url);
         }
         $this->UUID = $uuid;
         $this->use_sloodle = $CFG->modlos_cooperate_sloodle;
@@ -78,11 +78,11 @@ class  DeleteAvatar
 
         $this->hasPermit = hasModlosPermit($course_id);
         if (!$this->hasPermit and $USER->id!=$this->uid) {
-            print_error('modlos_access_forbidden', 'block_modlos', $this->return_url);
+            jbxl_print_error('modlos_access_forbidden', 'block_modlos', $this->return_url);
         }
 
         if (!($this->state&AVATAR_STATE_INACTIVE)) {
-            print_error('modlos_active_avatar', 'block_modlos',  $this->return_url);
+            jbxl_print_error('modlos_active_avatar', 'block_modlos',  $this->return_url);
         }
 
         $this->avatars_num = modlos_get_avatars_num($USER->id);
