@@ -19,6 +19,8 @@ class block_modlos extends block_base
     var $now_online;
     var $hg_online;
 
+    var $version;
+    var $release;
 
     function init()
     {
@@ -132,7 +134,7 @@ class block_modlos extends block_base
             $this->content->text.= '<strong>'.get_string('modlos_online_now','block_modlos').': '.$this->now_online."</strong><br />";        
         }
         //
-        $this->content->footer = '<hr /><a href="http://www.nsl.tuis.ac.jp/xoops/modules/xpwiki/?Modlos" target="_blank"><i>Modlos '.$this->release.'</i></a>';
+        $this->content->footer = '<hr /><a href="https://polaris.star-dust.jp/pukiwiki/?Modlos" target="_blank"><i>Modlos '.$this->release.'</i></a>';
 
         return $this->content;
     }
