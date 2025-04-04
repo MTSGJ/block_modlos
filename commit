@@ -6,8 +6,8 @@ git push
 #
 (cd jbxl && git commit -a -m "by commit command in block_modlos" && git push)
 (cd flotsam_XmlRpcGroup && git commit -a -m "by commit command in block_modlos" && git push)
-(cd opensim.phplib && git commit -a -m "by commit command in block_modlos" && git push)
-(cd opensim.helper && git commit -a -m "by commit command in block_modlos" && git push)
+(cd opensim.phplib  && git commit -a -m "by commit command in block_modlos" && git push)
+(cd opensim.helper  && git commit -a -m "by commit command in block_modlos" && git push)
 (cd opensim.modules && git commit -a -m "by commit command in block_modlos" && git push)
 
 #(cd opensimwiredux && )
