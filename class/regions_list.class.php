@@ -224,7 +224,7 @@ class  RegionsList
             $this->db_data[$colum]['user_id'] = 0; 
             $this->db_data[$colum]['owner_name'] = ' - '; 
             $avatar = modlos_get_avatar_info($this->db_data[$colum]['avatar_uuid']);
-            if ($avatar['uid']>0) {
+            if (is_array($avatar) and $avatar['uid']>0) {
                 $user_info = get_userinfo_by_id($avatar['uid']);
                 if ($user_info!=null) {
                     $this->db_data[$colum]['user_id'] = $avatar['uid'];

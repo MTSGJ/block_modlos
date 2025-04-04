@@ -22,6 +22,7 @@ class block_modlos extends block_base
     var $now_online;
     var $hg_online;
 
+    // for php-8.2
     //var $version;
     //var $release;
 
