@@ -98,7 +98,7 @@ class  RegionsList
         // Post Check
         if (data_submitted()) {
             if (!confirm_sesskey()) {
-                print_error('modlos_sesskey_error', 'block_modlos', $this->action_url);
+                jbxl_print_error('modlos_sesskey_error', 'block_modlos', $this->action_url);
             }
         }
 

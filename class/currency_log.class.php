@@ -56,7 +56,7 @@ class  CurrencyLog
         // for Guest
         $this->isGuest = isguestuser();
         if ($this->isGuest or !$CFG->modlos_use_currency_server) {
-            print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
+            jbxl_print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
         }
 
         $this->hasPermit   = hasModlosPermit($course_id);
@@ -179,7 +179,7 @@ class  CurrencyLog
         if ($avatardata!=null) $this->user_id = $avatardata['uid'];
 
         if (!$this->hasPermit and $USER->id!=$this->user_id) {
-            print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
+            jbxl_print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
         }
 
         ////////////////////////////////////////////////////////////////////

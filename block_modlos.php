@@ -11,6 +11,9 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 class block_modlos extends block_base 
 {
+    var $version = '';
+    var $release = '';
+
     var $grid_name;
     var $grid_status;
     var $user_count;
@@ -25,13 +28,14 @@ class block_modlos extends block_base
     function init()
     {
         global $CFG;
+        global $PLUGIN_release;
 
         if (empty($plugin)) $plugin = new stdClass();
         include($CFG->dirroot.'/blocks/modlos/version.php');
 
         $this->title   = get_string('modlos_menu', 'block_modlos');
         $this->version = $plugin->version;
-        $this->release = $plugin->release;
+        $this->release = $PLUGIN_release;
 
         //
         if (isset($CFG->modlos_grid_name)) $this->grid_name = $CFG->modlos_grid_name;
