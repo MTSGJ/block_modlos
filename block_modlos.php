@@ -22,8 +22,8 @@ class block_modlos extends block_base
     var $now_online;
     var $hg_online;
 
-    var $version;
-    var $release;
+    //var $version;
+    //var $release;
 
     function init()
     {
