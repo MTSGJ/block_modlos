@@ -129,7 +129,7 @@
       <td>&nbsp;</td>
 
       <td style="width:150px; table-layout:fixed; color:#000;" align="right">
-        <?php if (!$has_permit and !$avatar_max) {?>
+        <?php if ($has_permit or !$avatar_max) {?>
           <a href="<?php echo $avarars_list_url.$loss_.'1'?>" target="_self">
             <strong><?php echo $find_owner_ttl?></strong>
           </a>
@@ -200,10 +200,12 @@
 
         <?php if ($show_edit) {?>
           <td>
+            <!-- EDIT -->
             <?php if ($dat['editable']==AVATAR_EDITABLE) {?>
               <a href="<?php echo $this->edit_url. '&amp;uuid='.$dat['UUID']?>" >
                 <strong style="color: #cc1010;"><?php echo "EDIT"; //$editable_ttl?></strong>
               </a>
+            <!-- OWNER -->
             <?php } elseif ($dat['editable']==AVATAR_OWNER_EDITABLE and !($dat['state']&AVATAR_STATE_INACTIVE)) {?>
               <a href="<?php echo $this->avatar_url.'&amp;uuid='.$dat['UUID']?>">
                 <strong style="color: #aa5050;"><?php echo $get_owner_ttl?></strong>

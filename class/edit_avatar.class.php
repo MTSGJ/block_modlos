@@ -210,15 +210,18 @@ class  EditAvatar
 
         // GET
         else {
-            $this->passwd   = '';
-            $this->hmregion = $this->avatar['hmregion'];
-            $this->state    = $this->avatar['state'];
+            $this->passwd    = '';
+            $this->ownername = '';
+            $this->hmregion  = $this->avatar['hmregion'];
+            $this->state     = $this->avatar['state'];
 
             if ($this->hasPermit and $this->uid>0) {
                 $user_info = get_userinfo_by_id($this->uid);
-                $this->ownername  = $user_info->username;   //get_display_username($user_info->firstname, $user_info->lastname);
+                if ($user_info!=null) {
+                    $this->ownername  = $user_info->username;   //get_display_username($user_info->firstname, $user_info->lastname);
+                }
             }
-            else $this->ownername = $USER->username;        //get_display_username($USER->firstname, $USER->lastname);
+            else $this->ownername = $USER->username;            //get_display_username($USER->firstname, $USER->lastname);
             //
             if ($this->use_sloodle) $this->sloodle_num = modlos_check_sloodle_user($this->uid, $this->uuid);
         }
