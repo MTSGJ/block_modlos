@@ -8,9 +8,10 @@ $plugin->cron      = 0;
 $plugin->maturity  = MATURITY_STABLE;
 
 //$plugin->release = '3.4.1';
-$PLUGIN_release    = '3.4.1';
+$PLUGIN_release    = '3.4.2';
 
-$plugin->version   = 2025020300;    // delete $plugin->release
+$plugin->version   = 2025042400;    // fix avatars_list.html and lost avatar function
+//$plugin->version = 2025020300;    // delete $plugin->release
 //$plugin->version = 2023122800;    // to github version
 //$plugin->version = 2023081000;    // fix sim image bug
 //$plugin->version = 2016121000;    // fix bugs: opensim_get_avatar_uuid()
