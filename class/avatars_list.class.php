@@ -374,6 +374,7 @@ class  AvatarsList
 
         $has_permit     = $this->hasPermit;
         $avatar_max     = $this->isAvatarMax;
+        $ownerloss      = $this->ownerloss;
         $use_currency   = $this->use_currency;
         $lnk_firstname  = $this->lnk_firstname;
         $lnk_lastname   = $this->lnk_lastname;
@@ -413,6 +414,7 @@ class  AvatarsList
         $inactive_ttl   = get_string('modlos_inactive',      'block_modlos');
         $reset_ttl      = get_string('modlos_reset_ttl',     'block_modlos');
         $find_owner_ttl = get_string('modlos_find_owner_ttl','block_modlos');
+        $all_owner_ttl  = get_string('modlos_all_owner_ttl', 'block_modlos');
         $unknown_status = get_string('modlos_unknown_status','block_modlos');
         $page_num       = get_string('modlos_page',          'block_modlos');
         $page_num_of    = get_string('modlos_page_of',       'block_modlos');
@@ -481,7 +483,7 @@ class  AvatarsList
         }
 
         $dat['uuid']    = str_replace('-', '', $UUID);
-        $dat['rg_uuid'] = str_replace('-', '', $dat['region_id']);
+        if ($dat['region_id']!=null) $dat['rg_uuid'] = str_replace('-', '', $dat['region_id']);
 
         if ($this->hasPermit or $USER->id==$dat['uid']) {
             $dat['editable'] = AVATAR_EDITABLE;

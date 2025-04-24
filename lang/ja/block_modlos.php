@@ -50,6 +50,7 @@ $string['modlos_edit_ttl']          = ' 編集';
 $string['modlos_edit_user_ttl']     = ' ユーザ情報の編集 ';
 $string['modlos_reset_ttl']         = ' リセット ';
 $string['modlos_find_owner_ttl']    = ' 迷子のアバター';
+$string['modlos_all_owner_ttl']     = ' 全てのアバター';
 $string['modlos_cancel_ttl']        = ' キャンセル ';
 $string['modlos_delete_ttl']        = ' 削除 ';
 $string['modlos_get_owner_ttl']     = ' OWNER ';
