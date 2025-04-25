@@ -108,7 +108,7 @@
 
       <td width=200><strong><?php echo $avatarname_ttl?></strong></td>
 
-      <td width=150>
+      <td width=180>
         <?php if (USE_UTC_TIME) {?>
           <strong><?php echo $lastlogin_ttl?>&nbsp;(UTC)</strong>
         <?php }else{?>
@@ -116,14 +116,14 @@
         <?php }?>
       </td>
 
-      <td width= 80><strong style="color: #222;"><?php echo $status_ttl?></strong></td>
-      <td width=180><strong style="color: #222;"><?php echo $crntregion_ttl?></strong></td>
-      <td width=220><strong style="color: #222;"><?php echo $hg_ttl?></strong></td>
+      <td width=150><strong style="color: #222;"><?php echo $status_ttl?></strong></td>
+      <td width=300><strong style="color: #222;"><?php echo $crntregion_ttl?></strong></td>
+      <td width=300><strong style="color: #222;"><?php echo $hg_ttl?></strong></td>
 
       <td>&nbsp;</td>
 
       <?php if ($use_currency) {?>
-        <td width=150>
+        <td width=100>
           <strong style="color: #222;"><?php echo $CFG->modlos_currency_unit?></strong>
         </td>
       <?php }?>
