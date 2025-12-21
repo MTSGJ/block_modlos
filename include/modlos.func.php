@@ -1328,11 +1328,12 @@ function  print_tabnav($currenttab, $course_id, $show_create_tab=true)
 
     $tabs = array($toprow);
 
-    echo "<input type='hidden' name='course'   value='$course_id' />";
-    echo '<table align="center" style="margin-bottom:0.0em;"><tr><td>';
     echo '<style type="text/css">';
     include(CMS_MODULE_PATH."/html/html.css");
     echo '</style>';
+
+    echo "<input type='hidden' name='course'   value='$course_id' />";
+    echo '<table class="modlos-tabs-center noborder" align="center" style="margin-bottom:0.0em;"><tr><td>';
     print_tabs($tabs, $currenttab, NULL, NULL);
     echo '</td></tr></table>';
 }
@@ -1387,11 +1388,12 @@ function  print_tabnav_manage($currenttab, $course_id)
 
     $tabs = array($toprow);
 
-    echo "<input type='hidden' name='course'   value='$course_id' />";
-    echo '<table align="center" style="margin-bottom:0.0em;"><tr><td>';
     echo '<style type="text/css">';
     include(CMS_MODULE_PATH."/html/html.css");
     echo '</style>';
+
+    echo "<input type='hidden' name='course'   value='$course_id' />";
+    echo '<table class="modlos-tabs-center noborder" align="center" style="margin-bottom:0.0em;"><tr><td>';
     print_tabs($tabs, $currenttab, NULL, NULL);
     echo '</td></tr></table>';
 }
