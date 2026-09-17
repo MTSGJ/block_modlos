@@ -3,7 +3,7 @@
 ### Overview
 * Moodle blocks for [OpenSimulator](http://opensimulator.org/) control.
 * Avatar management, world map, estate management, etc.
-* Used by [Japan Open Grid](https://jogrid.net).
+* Used by [Japan Open Grid](https://www.jogrid.net).
 
 
 ### Wiki
