@@ -86,11 +86,13 @@ class  EditAvatar
 
         // get uid from Modlos and Sloodle DB
         $avatar = modlos_get_avatar_info($this->uuid);
-        $this->uid       = $avatar['uid'];
-        $this->ostate    = (int)$avatar['state'];
-        $this->firstname = $avatar['firstname'];
-        $this->lastname  = $avatar['lastname'];
-        $this->avatar    = $avatar;
+        $this->avatar = $avatar;
+        if ($avatar!=null) {
+            $this->uid       = $avatar['uid'];
+            $this->ostate    = (int)$avatar['state'];
+            $this->firstname = $avatar['firstname'];
+            $this->lastname  = $avatar['lastname'];
+        }
 
         $this->hasPermit = hasModlosPermit($course_id);
         if (!$this->hasPermit and $USER->id!=$this->uid) {
@@ -212,8 +214,12 @@ class  EditAvatar
         else {
             $this->passwd    = '';
             $this->ownername = '';
-            $this->hmregion  = $this->avatar['hmregion'];
-            $this->state     = $this->avatar['state'];
+            $this->hmregion  = '';
+            $this->state     = 0;
+            if ($this->avatar!=null) {
+                $this->hmregion  = $this->avatar['hmregion'];
+                $this->state     = $this->avatar['state'];
+            }
 
             if ($this->hasPermit and $this->uid>0) {
                 $user_info = get_userinfo_by_id($this->uid);
@@ -312,17 +318,21 @@ class  EditAvatar
             }
         }
 
+        // Check!!!!
         // Modlos and Sloodle DB
-        $update_user['id']        = $this->avatar['id'];
-        $update_user['UUID']      = $this->uuid;
-        $update_user['uid']       = $this->uid;
-        $update_user['firstname'] = $this->firstname;
-        $update_user['lastname']  = $this->lastname;
-        $update_user['hmregion']  = $this->hmregion;
-        $update_user['state']     = $this->state;
-        $update_user['time']      = time();
+        $ret = false;
+        if ($this->avatar!=null) {
+            $update_user['id']        = $this->avatar['id'];
+            $update_user['UUID']      = $this->uuid;
+            $update_user['uid']       = $this->uid;
+            $update_user['firstname'] = $this->firstname;
+            $update_user['lastname']  = $this->lastname;
+            $update_user['hmregion']  = $this->hmregion;
+            $update_user['state']     = $this->state;
+            $update_user['time']      = time();
+            $ret = modlos_set_avatar_info($update_user, $this->use_sloodle);
+        }
 
-        $ret = modlos_set_avatar_info($update_user, $this->use_sloodle);
         return $ret;
     }
 }

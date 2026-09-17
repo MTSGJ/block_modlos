@@ -506,6 +506,7 @@ function  modlos_insert_userstable($user)
     }
     if ($insobj->hmregion==null) $insobj->hmregion = '';
 
+    // Check!!! 同じ名前がある
     $ret = $DB->insert_record('modlos_users', $insobj);
 
     return $ret;
@@ -1166,6 +1167,7 @@ function  modlos_sync_opensimdb($update_check=true)
     foreach ($opnsim_users as $opnsim_user) {
         $opnsim_uuid = $opnsim_user['UUID']; 
         $opnsim_user['hmregion'] = opensim_get_region_name($opnsim_user['hmregion_id']);    // OpenSim DB のホームリージョン名
+
         //
         // ホームリージョンの名前を更新
         if (array_key_exists($opnsim_uuid, $modlos_users)) {
